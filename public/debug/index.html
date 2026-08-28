@@ -29,17 +29,21 @@
 <script>
 (function(){
   function yn(v){ return v ? '<span class="ok">yes</span>' : '<span class="no">NO</span>'; }
-  function room(){
-    var m = /[?&]room=([^&#]+)/.exec(location.search);
-    if (m) return decodeURIComponent(m[1]) + ' (from URL)';
-    try {
-      var s = sessionStorage.getItem('bide.room');
-      if (s) return s + ' (from session)';
-    } catch(e){}
-    return '<span class="no">none &mdash; generic welcome</span>';
+  /* Deliberately reports whether a code resolved, never the code — this
+     page can be opened by anyone who guesses the path. */
+  function code(){
+    var m = /[?&]r=([^&#]+)/.exec(location.search);
+    if (m) return decodeURIComponent(m[1]);
+    try { return sessionStorage.getItem('bide.r'); } catch(e){ return null; }
   }
-  var r = /[?&]room=([^&#]+)/.exec(location.search);
-  var key = r ? decodeURIComponent(r[1]) : null;
+  var key = code();
+  var entry = (key && window.BIDE && window.BIDE.rooms) ? window.BIDE.rooms[key] : null;
+  function room(){
+    if (!key) return '<span class="no">no code &mdash; generic welcome</span>';
+    if (!entry) return '<span class="no">code not recognised &mdash; generic welcome</span>';
+    var src = /[?&]r=/.test(location.search) ? 'from URL' : 'from session';
+    return 'Room ' + entry.number + ' (' + src + ')';
+  }
 
   var rows = [
     ['User agent', navigator.userAgent],
@@ -59,7 +63,7 @@
     ['Config loaded', yn(!!window.BIDE)],
     ['Property', window.BIDE && window.BIDE.property ? window.BIDE.property.label : '&mdash;'],
     ['Room resolved', room()],
-    ['Room name', key && window.BIDE && window.BIDE.rooms && window.BIDE.rooms[key] ? window.BIDE.rooms[key] : '&mdash;'],
+    ['Room name', entry ? entry.name : '&mdash;'],
     ['Page loaded at', new Date().toString()],
     ['&mdash;', '&mdash;'],
     ['Last action pressed', (function(){

@@ -358,8 +358,16 @@ Consequently each card is a self-contained chunk — one heating instruction, on
 The only difference between the nine sets at The View is which room they are in, and before MEWS exists the only per-set channel available is the URL configured on each television:
 
 ```
-https://<bide-tv-domain>/?room=4
+https://<bide-tv-domain>/?r=hmws9kv
 ```
+
+**An opaque code, not the room number.** `?room=4` is guessable, and the same identifier keys the guest's name and bill in Phase 2 and can raise a charge in Phase 3 &mdash; a guest with a remote should not reach another room by typing a different digit. Codes are seven characters, avoiding 0/O/1/l/I because they are typed by hand into an installer menu. The full list is in `docs/install-room-codes.md`.
+
+**Stated limitation, because it would be easy to over-trust this.** The code-to-room mapping ships in `/config/the-view.js`, which any browser on the guest WiFi can fetch. A static site cannot resolve a room without shipping the mapping, so this raises the bar against someone poking with a remote and does nothing against someone who opens the config URL. It is obscurity, not authentication.
+
+The real fix comes free with Phase 2: once middleware exists, the television sends its code, the server resolves it, and the mapping never leaves the server. Until then, room identity is a convenience and not a credential &mdash; anything that costs money or reveals personal data stays behind confirmation on the guest's own device (&sect;6.7).
+
+A code that does not resolve is treated exactly like no code: the generic welcome, never an error and never a hint that another value would work. Only a code that resolves is remembered, so a mistyped one cannot evict a good one.
 
 The exact domain is David's to confirm on the existing bide stack (§11); nothing in this design depends on which one it is.
 

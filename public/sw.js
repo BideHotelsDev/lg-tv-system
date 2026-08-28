@@ -69,7 +69,7 @@ self.addEventListener('fetch', function (event) {
           cache.put(req, res.clone());
           return res;
         }).catch(function () {
-          /* ignoreSearch so an offline boot at /?room=4 is served by the
+          /* ignoreSearch so an offline boot at /?r=<code> is served by the
              cached copy of /. The room comes from location.search via
              JavaScript, not from the HTML, so any cached copy is correct. */
           return cache.match(req, { ignoreSearch: true }).then(function (hit) {

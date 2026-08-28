@@ -13,7 +13,7 @@
   'use strict';
 
   var CFG = window.BIDE || {};
-  var ROOM_KEY = 'bide.room';
+  var ROOM_KEY = 'bide.r';
 
   /* ---------------------------------------------------------
      Room identity
@@ -22,26 +22,35 @@
      and comes back would otherwise land on a bare "/" and watch the
      room line disappear mid-stay. Parameter first, session second.
      --------------------------------------------------------- */
-  function resolveRoom() {
-    var room = null;
+  function resolveCode() {
+    var code = null;
 
     try {
-      var match = /[?&]room=([^&#]+)/.exec(window.location.search);
-      if (match) room = decodeURIComponent(match[1]);
+      var match = /[?&]r=([^&#]+)/.exec(window.location.search);
+      if (match) code = decodeURIComponent(match[1]);
     } catch (e) { /* malformed URL — fall through to storage */ }
 
-    if (room) {
-      try { window.sessionStorage.setItem(ROOM_KEY, room); } catch (e) {}
-      return room;
+    /* Only remember a code that actually resolves. Otherwise a mistyped
+       or guessed code in the URL would evict the real one and the set
+       would stay generic until someone reloaded its configured URL. */
+    if (code && CFG.rooms && CFG.rooms[code]) {
+      try { window.sessionStorage.setItem(ROOM_KEY, code); } catch (e) {}
+      return code;
     }
+    if (code) return code;
 
-    try { room = window.sessionStorage.getItem(ROOM_KEY); } catch (e) {}
-    return room;
+    try { code = window.sessionStorage.getItem(ROOM_KEY); } catch (e) {}
+    return code;
   }
 
-  function roomName(room) {
-    if (!room || !CFG.rooms) return null;
-    return CFG.rooms[room] || null;
+  /* An unknown code resolves to nothing, exactly like no code at all:
+     the generic welcome, never an error and never a hint that some
+     other code would have worked. */
+  function lookupRoom(code) {
+    if (!code || !CFG.rooms) return null;
+    var entry = CFG.rooms[code];
+    if (!entry || !entry.number || !entry.name) return null;
+    return entry;
   }
 
   /* ---------------------------------------------------------
@@ -52,16 +61,15 @@
      so nothing renders as a gap.
      --------------------------------------------------------- */
   function fill() {
-    var room = resolveRoom();
-    var name = roomName(room);
+    var entry = lookupRoom(resolveCode());
 
     var values = {
       'property': CFG.property ? CFG.property.label : null,
       'wifi-network': CFG.wifi ? CFG.wifi.network : null,
       'wifi-password': CFG.wifi ? CFG.wifi.password : null,
       'checkout-time': CFG.checkout ? CFG.checkout.time : null,
-      'room-number': room,
-      'room-name': name
+      'room-number': entry ? entry.number : null,
+      'room-name': entry ? entry.name : null
     };
 
     var nodes = document.querySelectorAll('[data-bide]');
@@ -75,7 +83,7 @@
        No room -> the generic welcome. Not an error, just less personal. */
     var roomLines = document.querySelectorAll('[data-bide-room-line]');
     for (var j = 0; j < roomLines.length; j++) {
-      if (room && name) {
+      if (entry) {
         roomLines[j].className += ' is-shown';
       } else {
         roomLines[j].parentNode.removeChild(roomLines[j]);

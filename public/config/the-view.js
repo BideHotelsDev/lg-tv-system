@@ -32,18 +32,33 @@ window.BIDE = {
     time: '11am'
   },
 
-  /* Per-TV room identity, resolved from ?room= on the configured
-     home page URL. Confirm the full nine with David before install. */
+  /* Per-TV room identity.
+
+     Each television's configured URL carries an opaque code rather than
+     its room number: /?r=hmws9kv, not /?room=4.
+
+     Room numbers are guessable, and the same identifier keys the guest's
+     name and bill in Phase 2 and can raise a charge in Phase 3 — a guest
+     with a remote should not be able to order breakfast to room 7 by
+     typing a different digit.
+
+     Treat this as obscurity, not authentication. It stops casual poking;
+     it does not survive someone photographing the URL. Anything that
+     costs money or reveals personal data must be confirmed on the guest's
+     own device or verified server-side — see spec 6.7 and 7.1.
+
+     Codes avoid 0/O/1/l/I, because they get read off a screen and typed
+     into an installer menu by hand. */
   rooms: {
-    '1': 'The Dunnet',
-    '2': 'The Scrabster',
-    '3': 'The Holborn',
-    '4': 'The Pentland',
-    '5': 'The Stroma',
-    '6': 'The Castlehill',
-    '7': 'The Brims',
-    '8': 'The Sandside',
-    '9': 'The Ness'
+    'dyh28yp': { number: '1', name: 'The Dunnet' },
+    '8gjzty7': { number: '2', name: 'The Scrabster' },
+    'c5f9a5z': { number: '3', name: 'The Holborn' },
+    'hmws9kv': { number: '4', name: 'The Pentland' },
+    'rbsg3ek': { number: '5', name: 'The Stroma' },
+    'zvfm59f': { number: '6', name: 'The Castlehill' },
+    'r5btnxd': { number: '7', name: 'The Brims' },
+    'ttt8sp7': { number: '8', name: 'The Sandside' },
+    'nx2kts7': { number: '9', name: 'The Ness' }
   },
 
   /* Phase 5 replication: recolour the horizon motif per property.

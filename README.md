@@ -74,6 +74,17 @@ An absent or unknown room degrades to the generic welcome — never an error.
   now revalidates in the background and the change lands one reload later
   rather than never — but bump it anyway.
 
+## Deploying
+
+Railway builds the `Dockerfile` and runs Caddy, so the cache headers the
+design depends on are ours to set rather than the platform's to grant.
+
+**Not yet verified** — the container has never been built. Do this first:
+
+```bash
+docker build -t bide-tv . && docker run --rm -p 8080:8080 bide-tv
+```
+
 ## Before this goes near The View
 
 Every item on the dev-kit verification list in §10 of the spec, on the 32"

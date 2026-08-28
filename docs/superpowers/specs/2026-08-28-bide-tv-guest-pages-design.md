@@ -470,7 +470,13 @@ Everything deferred to hardware, in one place. Ordered by what blocks the most.
 6. **Overscan** — does the 5% inset hold, or does the panel eat the edges?
 7. **The idle reload firing** (§8.2).
 8. **Arrow-key navigation driven from the actual remote**, both layouts (§6.4). The JavaScript handler is verified in desktop Chromium; the remote's key codes are not.
-9. **Welcome screen left idle for 30+ minutes — confirm the URL never changes on its own.** A single unexplained navigation occurred during bench testing and did not reproduce across roughly fifteen subsequent loads; it was almost certainly a test-harness race. A screen that wanders off on its own in an empty room is worth ten minutes to rule out.
+9. **The container actually builds and serves.** `Dockerfile` and `Caddyfile` are written but were never run &mdash; the Docker daemon did not start during the build session. A Caddy syntax error fails the first deploy. One command settles it:
+   ```
+   docker build -t bide-tv . && docker run --rm -p 8080:8080 bide-tv
+   curl -sI localhost:8080/ | grep -i cache-control          # expect: no-cache
+   curl -sI localhost:8080/assets/bide.css | grep -i cache-control  # expect: max-age=31536000
+   ```
+10. **Welcome screen left idle for 30+ minutes — confirm the URL never changes on its own.** A single unexplained navigation occurred during bench testing and did not reproduce across roughly fifteen subsequent loads; it was almost certainly a test-harness race. A screen that wanders off on its own in an empty room is worth ten minutes to rule out.
 
 ---
 

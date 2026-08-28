@@ -1,0 +1,12 @@
+{
+  "root": true,
+  "env": { "browser": true, "serviceworker": true, "es2020": true },
+  "parserOptions": { "ecmaVersion": 2020, "sourceType": "script" },
+  "plugins": ["compat"],
+  "extends": ["eslint:recommended", "plugin:compat/recommended"],
+  "settings": { "polyfills": [] },
+  "rules": {
+    "compat/compat": "error",
+    "no-empty": ["error", { "allowEmptyCatch": true }]
+  }
+}

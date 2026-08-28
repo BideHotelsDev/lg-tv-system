@@ -1,0 +1,32 @@
+# Static serving for the bide guest TV pages.
+#
+# Shipped in a container (see Dockerfile) rather than relying on a platform's
+# static hosting, because the caching design depends on setting these headers
+# exactly. Owning the server means they are ours to set, not the platform's
+# to grant.
+#
+#   HTML + config + sw : revalidate every load, so a content edit lands on
+#                        the next page view
+#   assets             : cached hard; the ?v= query is bumped by hand on
+#                        deploy, which is what invalidates them
+
+:{$PORT:8080} {
+	root * /srv/public
+	encode gzip
+
+	@html path / */ *.html
+	header @html Cache-Control "no-cache"
+
+	header /config/* Cache-Control "no-cache"
+	header /sw.js    Cache-Control "no-cache"
+	header /assets/* Cache-Control "public, max-age=31536000"
+
+	try_files {path} {path}/index.html
+	file_server
+
+	# Never the browser's error page.
+	handle_errors {
+		rewrite * /offline.html
+		file_server
+	}
+}

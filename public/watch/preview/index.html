@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bide &middot; Watch — preview</title>
+<!-- DEV ONLY: replace with self-hosted TT Ramillas + Jost when Asa provides the files (spec 8.4) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,420;9..144,560&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/bide.css?v=2">
+</head>
+<body data-bide-page="preview" data-bide-back="/watch/">
+
+<div class="horizon"></div>
+<div class="horizon-glow"></div>
+
+<div class="screen">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="wordmark">bide<span class="reg">&reg;</span></div>
+      <div class="property" data-bide="property">The View &middot; Thurso</div>
+    </div>
+    <div class="status"><div class="clock" id="clock">--:--</div></div>
+  </header>
+
+  <div class="page-head">
+    <h1 class="page-title"><em>Watch</em></h1>
+    <p class="page-sub">How this will work once Pro:Centric is live.</p>
+  </div>
+
+  <main class="detail">
+    <div class="draft-flag">Preview &mdash; Phase 1c, needs Pro:Centric Cloud</div>
+    <p>Today the Watch tile explains which key to press. In Phase 1c it opens the apps directly from this screen, without the guest ever seeing the television&rsquo;s own menus.</p>
+    <div class="appgrid">
+      <button class="app" data-mock="Opens BBC iPlayer. In Phase 1c, Pro:Centric launches the app directly.">BBC iPlayer</button>
+      <button class="app" data-mock="Opens ITVX. In Phase 1c, Pro:Centric launches the app directly.">ITVX</button>
+      <button class="app" data-mock="Opens Channel 4. In Phase 1c, Pro:Centric launches the app directly.">Channel 4</button>
+      <button class="app" data-mock="Opens My5. In Phase 1c, Pro:Centric launches the app directly.">My5</button>
+      <button class="app" data-mock="Opens Netflix. Guests sign in by casting from their phone, not on the TV.">Netflix</button>
+      <button class="app" data-mock="Opens Prime Video. Guests sign in by casting from their phone, not on the TV.">Prime Video</button>
+    </div>
+
+    <div class="mock-note"><p>A web page in the television&rsquo;s browser cannot launch a native app &mdash; there is no URI scheme available to it. Pro:Centric can, which is why this is Phase 1c and not Phase 1b. The layout and wording here carry straight over; only the launch call changes.</p></div>
+  </main>
+
+  <footer class="footer">
+    <a class="home-link" href="/watch/">
+      <svg viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      <span>Back to watch</span>
+    </a>
+    <div class="privacy">
+      <svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7.5-7 9-4-1.5-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      <span>Your details are wiped from this TV at checkout</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/config/the-view.js?v=2"></script>
+<script src="/assets/bide.js?v=2"></script>
+</body>
+</html>

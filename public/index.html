@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bide · The View, Thurso</title>
+<!-- DEV ONLY: replace with self-hosted TT Ramillas + Jost when Asa provides the files (spec 8.4) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,420;9..144,560&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/bide.css?v=2">
+</head>
+<body data-bide-page="welcome">
+
+<div class="horizon"></div>
+<div class="horizon-glow"></div>
+
+<div class="screen">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="wordmark">bide<span class="reg">&reg;</span></div>
+      <div class="property" data-bide="property">The View &middot; Thurso</div>
+    </div>
+    <div class="status"><div class="clock" id="clock">--:--</div></div>
+  </header>
+
+  <section class="greeting">
+    <h1 class="failte">F&agrave;ilte.</h1>
+    <p class="sub">
+      <span data-bide-room-line>You're in Room <b data-bide="room-number"></b> &middot; <span class="accent" data-bide="room-name"></span>. </span>Checkout is at <b data-bide="checkout-time">11am</b>. Make yourself at home.
+    </p>
+  </section>
+
+  <nav class="rail">
+    <div class="rail-label">Your room</div>
+    <div class="tiles">
+
+      <a class="tile" href="/watch/">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M9.5 8.5l5 2.25-5 2.25z" style="fill:#F9F8F3" stroke="none"/></svg></div>
+        <div class="txt"><h3>Watch</h3><p>Live &amp; catch-up telly, films and sport</p></div>
+      </a>
+
+      <a class="tile" href="/cast/">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M5 17a5 5 0 00-2-4"/><path d="M8 17a8 8 0 00-5-7.4"/><circle cx="4" cy="16.5" r=".9" style="fill:#F9F8F3" stroke="none"/></svg></div>
+        <div class="txt"><h3>Cast your phone</h3><p>Scan once, paired for your whole stay</p></div>
+      </a>
+
+      <a class="tile" href="/house/">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></div>
+        <div class="txt"><h3>House guide</h3><p>How everything works, and who to ask</p></div>
+      </a>
+
+      <a class="tile" href="/nc500/">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 5-5 2.2 2.2-5z"/></svg></div>
+        <div class="txt"><h3>Explore the NC500</h3><p>Our picks, right on your doorstep</p></div>
+      </a>
+
+      <a class="tile" href="/eat/">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M7 3v7a2 2 0 002 2h0V3M9 12v9"/><path d="M16 3c-1.5 1-2.5 3-2.5 5s1 3 2.5 3v10"/></svg></div>
+        <div class="txt"><h3>Eat &amp; drink</h3><p>Where we'd send our own family</p></div>
+      </a>
+
+      <a class="tile" href="/stay/">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5"/></svg></div>
+        <div class="txt"><h3>Your stay</h3><p>Late checkout, your bill, get in touch</p></div>
+      </a>
+
+    </div>
+  </nav>
+
+  <footer class="footer">
+    <div>WiFi <b data-bide="wifi-network">bide-guest</b> &middot; password <b data-bide="wifi-password">pentland</b></div>
+    <div class="privacy">
+      <svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7.5-7 9-4-1.5-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      <span>Your details are wiped from this TV at checkout</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/config/the-view.js?v=2"></script>
+<script src="/assets/bide.js?v=2"></script>
+</body>
+</html>

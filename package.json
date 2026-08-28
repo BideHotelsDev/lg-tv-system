@@ -1,0 +1,17 @@
+{
+  "name": "bide-tv-guest-pages",
+  "version": "0.1.0",
+  "private": true,
+  "description": "bide guest TV — Phase 1b HTML5 guest pages. Static site, no build step. Nothing here ships to the television.",
+  "scripts": {
+    "dev": "python3 -m http.server 8080 --directory public",
+    "check:css": "doiuse --browsers \"chrome >= 87\" public/assets/bide.css",
+    "check:js": "eslint public/assets/bide.js public/sw.js",
+    "check": "npm run check:css && npm run check:js"
+  },
+  "devDependencies": {
+    "doiuse": "^6.0.2",
+    "eslint": "^8.57.0",
+    "eslint-plugin-compat": "^4.2.0"
+  }
+}

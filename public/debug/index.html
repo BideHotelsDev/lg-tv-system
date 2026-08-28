@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bide &middot; diagnostics</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/bide.css?v=2">
+<style>
+  /* Readable across a room. There are no devtools on a hotel TV. */
+  .diag{padding:4vh 5vw;height:100vh;overflow-y:auto;position:relative;z-index:1}
+  .diag h1{font-family:var(--font-display);font-size:clamp(34px,5vh,64px);margin-bottom:2vh}
+  .diag table{width:100%;border-collapse:collapse;font-size:clamp(17px,2vh,26px)}
+  .diag td{padding:.9vh 1vw;border-bottom:1px solid var(--stone-14);vertical-align:top}
+  .diag td:first-child{color:var(--stone-60);width:34%;font-weight:300}
+  .diag td:last-child{font-weight:400;word-break:break-word}
+  .ok{color:var(--gorse)}
+  .no{color:#ff8b6b}
+</style>
+</head>
+<body data-bide-page="debug">
+<div class="horizon"></div>
+<div class="diag">
+  <h1>Diagnostics</h1>
+  <table id="out"></table>
+</div>
+
+<script src="/config/the-view.js?v=2"></script>
+<script>
+(function(){
+  function yn(v){ return v ? '<span class="ok">yes</span>' : '<span class="no">NO</span>'; }
+  function room(){
+    var m = /[?&]room=([^&#]+)/.exec(location.search);
+    if (m) return decodeURIComponent(m[1]) + ' (from URL)';
+    try {
+      var s = sessionStorage.getItem('bide.room');
+      if (s) return s + ' (from session)';
+    } catch(e){}
+    return '<span class="no">none &mdash; generic welcome</span>';
+  }
+  var r = /[?&]room=([^&#]+)/.exec(location.search);
+  var key = r ? decodeURIComponent(r[1]) : null;
+
+  var rows = [
+    ['User agent', navigator.userAgent],
+    ['Viewport', window.innerWidth + ' x ' + window.innerHeight],
+    ['Screen', screen.width + ' x ' + screen.height],
+    ['Device pixel ratio', window.devicePixelRatio],
+    ['Tile layout', window.innerWidth <= 1500 ? '3 x 2 (small panel)' : '6 x 1 (mockup)'],
+    ['&mdash;', '&mdash;'],
+    ['CSS custom properties', yn(window.CSS && CSS.supports && CSS.supports('--a','0'))],
+    ['CSS clamp()', yn(window.CSS && CSS.supports && CSS.supports('width','clamp(1px,2vh,3px)'))],
+    ['CSS grid gap', yn(window.CSS && CSS.supports && CSS.supports('gap','1px'))],
+    [':focus-visible', yn(window.CSS && CSS.supports && CSS.supports('selector(:focus-visible)'))],
+    ['Container queries (not used)', yn(window.CSS && CSS.supports && CSS.supports('container-type','size'))],
+    ['sessionStorage', yn((function(){try{sessionStorage.setItem('t','1');sessionStorage.removeItem('t');return true;}catch(e){return false;}})())],
+    ['Service worker API', yn('serviceWorker' in navigator)],
+    ['&mdash;', '&mdash;'],
+    ['Config loaded', yn(!!window.BIDE)],
+    ['Property', window.BIDE && window.BIDE.property ? window.BIDE.property.label : '&mdash;'],
+    ['Room resolved', room()],
+    ['Room name', key && window.BIDE && window.BIDE.rooms && window.BIDE.rooms[key] ? window.BIDE.rooms[key] : '&mdash;'],
+    ['Page loaded at', new Date().toString()],
+    ['&mdash;', '&mdash;'],
+    ['Last action pressed', (function(){
+       try {
+         var raw = sessionStorage.getItem('bide.lastAction');
+         if (!raw) return '<span class="no">none this session</span>';
+         var a = JSON.parse(raw);
+         return '<strong>' + a.label + '</strong><br>' + a.message + '<br>' + a.at;
+       } catch(e){ return '<span class="no">unreadable</span>'; }
+     })()]
+  ];
+
+  var html = '';
+  for (var i=0;i<rows.length;i++){
+    html += '<tr><td>'+rows[i][0]+'</td><td>'+rows[i][1]+'</td></tr>';
+  }
+  document.getElementById('out').innerHTML = html;
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(regs){
+      var state = regs.length ? 'registered (' + regs.length + ')' : 'not registered';
+      var active = regs.length && regs[0].active ? regs[0].active.state : '&mdash;';
+      document.getElementById('out').innerHTML +=
+        '<tr><td>Service worker</td><td>'+state+'</td></tr>' +
+        '<tr><td>SW state</td><td>'+active+'</td></tr>';
+    });
+    caches.keys().then(function(keys){
+      document.getElementById('out').innerHTML +=
+        '<tr><td>Caches</td><td>'+(keys.join(', ')||'&mdash;')+'</td></tr>';
+    });
+  }
+})();
+</script>
+</body>
+</html>

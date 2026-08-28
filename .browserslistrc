@@ -1,0 +1,5 @@
+# The build floor is the LG 32LN661H: webOS 22 => Chromium 87.
+# Two of the three dev-kit sets run this, and future properties will
+# have whatever is already on the wall. Anything newer than 87 is a
+# bug waiting to happen in Thurso.
+chrome >= 87

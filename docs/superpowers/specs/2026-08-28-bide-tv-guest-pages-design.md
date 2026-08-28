@@ -209,7 +209,20 @@ With no build step, the top bar and footer markup repeat across the five documen
 
 ### 5.5 Hosting
 
-The existing bide stack on Railway, per §5.2 of the scope pack. Static file serving; no runtime process.
+Railway, per §5.2 of the scope pack, serving static files through Caddy in a container.
+
+| | |
+|---|---|
+| Repository | `BideHotelsDev/lg-tv-system` |
+| Railway project | `lg-tv-system` &middot; environment `production` |
+| Service | `guest-tv`, linked to the GitHub repo |
+| URL | https://guest-tv-production.up.railway.app |
+
+**Deployment is a push.** The service builds from GitHub, so `git push` to `main` deploys. That matters here because the content workflow is "David messages Kyle, Kyle edits" &mdash; there is no separate deploy step to forget.
+
+Caddy is shipped in the container deliberately rather than using platform static hosting, because §8.1's caching design depends on setting headers exactly. Owning the server makes them ours.
+
+**This URL currently serves the prototype** &mdash; `demo: true`, invented restaurants, content still awaiting David and Samantha. It is the right thing to point the dev kit at. Pointing the nine live sets at it is a separate decision, gated on real content and `demo: false`.
 
 ---
 
@@ -463,19 +476,14 @@ Mapping to deliverable 2 in §13 of the scope pack — "all pages live, on-brand
 Everything deferred to hardware, in one place. Ordered by what blocks the most.
 
 1. **Can the television boot straight to a URL, or is it the browser home page behind one key?** Settles whether §3.3's boot target or browser-home floor is the reality.
-2. **Does Railway allow custom `Cache-Control` headers?** §8.1 depends on it. Fallback is versioning the HTML, which is clumsier.
+2. ~~**Does Railway allow custom `Cache-Control` headers?**~~ **VERIFIED 2026-08-28.** Confirmed live: `no-cache` on HTML, `/config/*` and `/sw.js`; `public, max-age=31536000` on `/assets/*`. Shipping Caddy in a container means the headers are ours, not the platform's to grant.
 3. **Type-size floors calibrated on the actual 32" panel** (§4.2).
 4. **Service worker update path** — deploy a change, confirm it reaches the set, confirm it cannot become stuck on a stale version. Test hardest.
 5. **The Back key's actual keycode** on the real remote (§6.3).
 6. **Overscan** — does the 5% inset hold, or does the panel eat the edges?
 7. **The idle reload firing** (§8.2).
 8. **Arrow-key navigation driven from the actual remote**, both layouts (§6.4). The JavaScript handler is verified in desktop Chromium; the remote's key codes are not.
-9. **The container actually builds and serves.** `Dockerfile` and `Caddyfile` are written but were never run &mdash; the Docker daemon did not start during the build session. A Caddy syntax error fails the first deploy. One command settles it:
-   ```
-   docker build -t bide-tv . && docker run --rm -p 8080:8080 bide-tv
-   curl -sI localhost:8080/ | grep -i cache-control          # expect: no-cache
-   curl -sI localhost:8080/assets/bide.css | grep -i cache-control  # expect: max-age=31536000
-   ```
+9. ~~**The container actually builds and serves.**~~ **VERIFIED 2026-08-28** by the first Railway deploy, which builds the same `Dockerfile`. Every route returns 200, and an unknown path serves the branded offline page rather than a server error.
 10. **Welcome screen left idle for 30+ minutes — confirm the URL never changes on its own.** A single unexplained navigation occurred during bench testing and did not reproduce across roughly fifteen subsequent loads; it was almost certainly a test-harness race. A screen that wanders off on its own in an empty room is worth ten minutes to rule out.
 
 ---

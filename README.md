@@ -76,14 +76,19 @@ An absent or unknown room degrades to the generic welcome — never an error.
 
 ## Deploying
 
-Railway builds the `Dockerfile` and runs Caddy, so the cache headers the
-design depends on are ours to set rather than the platform's to grant.
+**Live:** https://guest-tv-production.up.railway.app
 
-**Not yet verified** — the container has never been built. Do this first:
+Railway service `guest-tv` (project `lg-tv-system`) is linked to this repo,
+so **`git push` to `main` deploys**. Railway builds the `Dockerfile` and runs
+Caddy, which is how the cache headers the design depends on are ours to set
+rather than the platform's to grant.
 
-```bash
-docker build -t bide-tv . && docker run --rm -p 8080:8080 bide-tv
-```
+Verified live: `no-cache` on HTML, config and the service worker;
+`max-age=31536000` on `/assets/*`; unknown paths serve the branded offline
+page rather than a server error.
+
+This URL serves the **prototype** — `demo: true`, invented restaurants,
+content still pending. Right for the dev kit; not for the nine live rooms.
 
 ## Before this goes near The View
 

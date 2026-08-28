@@ -214,9 +214,14 @@ Railway, per §5.2 of the scope pack, serving static files through Caddy in a co
 | | |
 |---|---|
 | Repository | `BideHotelsDev/lg-tv-system` |
-| Railway project | `lg-tv-system` &middot; environment `production` |
+| Railway project | `lg-tv-system` &middot; environment `staging` |
 | Service | `guest-tv`, linked to the GitHub repo |
-| URL | https://guest-tv-production.up.railway.app |
+| URL | https://the-view.tv.bidehotels.com (pending DNS) |
+| Railway URL | https://guest-tv-production.up.railway.app |
+
+The property lives on its own subdomain so Phase 5 replication does not collide: the next property is `elderberry.tv.bidehotels.com` and so on, each its own service with its own content and config.
+
+**The environment is named `staging`, and the hostname reads like production.** That is fine while this is a prototype pointed at the dev kit. If a separate production environment is ever created, the domain should move to it rather than the two drifting apart.
 
 **Deployment is a push.** The service builds from GitHub, so `git push` to `main` deploys. That matters here because the content workflow is "David messages Kyle, Kyle edits" &mdash; there is no separate deploy step to forget.
 

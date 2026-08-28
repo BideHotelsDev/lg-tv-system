@@ -11,10 +11,9 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="/assets/bide.css?v=2">
 </head>
-<body data-bide-page="opening" data-bide-back="/watch/">
+<body data-bide-page="app" data-bide-back="/watch/">
 
 <div class="horizon"></div>
-<div class="horizon-glow"></div>
 
 <div class="screen">
 
@@ -26,11 +25,16 @@
     <div class="status"><div class="clock" id="clock">--:--</div></div>
   </header>
 
-  <main class="stage">
-    <div class="stage-kicker">Opening</div>
-    <h1 class="stage-title">Prime Video</h1>
-    <p class="stage-sub">Sign in with your own account by casting from your phone.</p>
-    <div class="loader"><i></i></div>
+  <main class="stream">
+    <div class="hero a7">
+      <div class="hero-kicker">Prime Video</div>
+      <div class="hero-title">Use your own account</div>
+      <p class="hero-sub">We do not keep sign-ins on this television. Cast from your phone and everything you already pay for appears here &mdash; then it is wiped when you check out.</p>
+    </div>
+    <div class="row" data-nav-row>
+      <a class="btn" href="/cast/">Cast from my phone</a>
+      <a class="btn btn--quiet" href="/watch/">Something else</a>
+    </div>
   </main>
 
   <footer class="footer">

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bide &middot; The north coast</title>
+<!-- DEV ONLY: replace with self-hosted TT Ramillas + Jost when Asa provides the files (spec 8.4) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,420;9..144,560&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/bide.css?v=2">
+</head>
+<body data-bide-page="map" data-bide-back="/nc500/">
+
+<div class="horizon"></div>
+
+<div class="screen">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="wordmark">bide<span class="reg">&reg;</span></div>
+      <div class="property" data-bide="property">The View &middot; Thurso</div>
+    </div>
+    <div class="status"><div class="clock" id="clock">--:--</div></div>
+  </header>
+
+  <div class="page-head">
+    <h1 class="page-title">The north <em>coast</em></h1>
+    <p class="page-sub">You are in Thurso. Everything here is within forty minutes.</p>
+  </div>
+  <main class="mapwrap" data-nav-row>
+    <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid meet"><defs><clipPath id="mapclip"><rect x="0" y="0" width="320" height="180" rx="4"/></clipPath></defs><g clip-path="url(#mapclip)"><rect width="320" height="180" fill="#0e1c18"/><g opacity=".45" stroke="#244233" stroke-width="1" fill="none"><path d="M0 24 Q80 18 160 24 Q240 30 320 24"/><path d="M0 34 Q80 28 160 34 Q240 40 320 34"/></g><g fill="#1f3a2f"><path d="M150 6 Q176 0 196 8 Q206 14 190 18 Q166 22 150 16 Z"/><path d="M212 10 Q236 4 252 12 Q258 18 242 21 Q222 24 212 18 Z"/></g><text x="200" y="32" class="pin-label" text-anchor="middle" style="letter-spacing:.3em;font-size:6px;opacity:.75">ORKNEY</text><path d="M0 92 Q34 86 62 83 Q80 81 95 90 Q112 80 130 76 Q140 74 142 50 L146 42 L158 40 L162 52 L164 72 Q188 70 214 66 Q248 60 278 50 Q300 44 320 48 L320 180 L0 180 Z" fill="#1b3329"/><path d="M0 92 Q34 86 62 83 Q80 81 95 90 Q112 80 130 76 Q140 74 142 50 L146 42 L158 40 L162 52 L164 72 Q188 70 214 66 Q248 60 278 50 Q300 44 320 48" fill="none" stroke="#FAB30C" stroke-width="1.2" opacity=".6" stroke-linecap="round"/><path d="M40 100 Q90 104 132 90 Q162 80 202 79 Q252 75 302 62" fill="none" stroke="#F9F8F3" stroke-width=".8" opacity=".2" stroke-dasharray="4 3"/><g><circle cx="116" cy="104" r="3.4" class="here-dot"/><circle cx="116" cy="104" r="7.5" fill="none" stroke="#F9F8F3" stroke-width=".8" opacity=".45"/><text x="116" y="119" class="here-label" text-anchor="middle">THE VIEW</text></g><a href="/nc500/orkney-ferry/" class="pin-hit" tabindex="0"><circle cx="62" cy="80" r="10" fill="transparent"/><circle cx="62" cy="80" r="11" class="pin-ring"/><circle cx="62" cy="80" r="3.6" class="pin-dot"/><text x="62" y="66" class="pin-label" text-anchor="middle">Scrabster</text></a><a href="/nc500/thurso-beach/" class="pin-hit" tabindex="0"><circle cx="98" cy="88" r="10" fill="transparent"/><circle cx="98" cy="88" r="11" class="pin-ring"/><circle cx="98" cy="88" r="3.6" class="pin-dot"/><text x="98" y="79" class="pin-label" text-anchor="middle">Thurso beach</text></a><a href="/nc500/dunnet-head/" class="pin-hit" tabindex="0"><circle cx="152" cy="44" r="10" fill="transparent"/><circle cx="152" cy="44" r="11" class="pin-ring"/><circle cx="152" cy="44" r="3.6" class="pin-dot"/><text x="152" y="35" class="pin-label" text-anchor="middle">Dunnet Head</text></a><a href="/nc500/castle-of-mey/" class="pin-hit" tabindex="0"><circle cx="206" cy="66" r="10" fill="transparent"/><circle cx="206" cy="66" r="11" class="pin-ring"/><circle cx="206" cy="66" r="3.6" class="pin-dot"/><text x="206" y="57" class="pin-label" text-anchor="middle">Castle of Mey</text></a><a href="/nc500/duncansby-stacks/" class="pin-hit" tabindex="0"><circle cx="285" cy="50" r="10" fill="transparent"/><circle cx="285" cy="50" r="11" class="pin-ring"/><circle cx="285" cy="50" r="3.6" class="pin-dot"/><text x="285" y="41" class="pin-label" text-anchor="middle">Duncansby</text></a></g></svg>
+  </main>
+  <p class="map-legend">Move with the arrows to pick a place, then press OK.</p>
+
+  <footer class="footer">
+    <a class="home-link" href="/">
+      <svg viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      <span>Back to the NC500 guide</span>
+    </a>
+    <div class="privacy">
+      <svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7.5-7 9-4-1.5-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      <span>Your details are wiped from this TV at checkout</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/config/the-view.js?v=2"></script>
+<script src="/assets/bide.js?v=2"></script>
+</body>
+</html>

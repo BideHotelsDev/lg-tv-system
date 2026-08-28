@@ -106,7 +106,7 @@
      paints it, so arrow keys still work if the script dies.
      --------------------------------------------------------- */
   function focusables() {
-    return document.querySelectorAll('.tile, .card, .btn, .app, .home-link');
+    return document.querySelectorAll('.tile, .card, .btn, .app, .poster, .apptile, .home-link');
   }
 
   function startFocus() {
@@ -118,7 +118,7 @@
         el.addEventListener('focus', function () {
           el.classList.add('is-focused');
           if (el.scrollIntoView) {
-            el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
           }
         });
         el.addEventListener('blur', function () { el.classList.remove('is-focused'); });
@@ -127,7 +127,7 @@
     }
 
     /* Focus is never lost and never invisible. */
-    var first = document.querySelector('.tile, .card, .btn, .app');
+    var first = document.querySelector('.tile, .card, .btn, .app, .poster, .apptile');
     if (first) first.focus();
   }
 
@@ -145,9 +145,55 @@
      the television's browser does provide, and Enter still follows
      a focused link natively.
      --------------------------------------------------------- */
+  /* Row-based navigation for the streaming screens: left and right move
+     along a row, up and down step between rows keeping roughly the same
+     position. This is what a remote expects, and a flat index cannot do
+     it because rows are different lengths. */
+  function startRowNav(rowEls) {
+    var rows = [];
+    for (var r = 0; r < rowEls.length; r++) {
+      var found = rowEls[r].querySelectorAll('.poster, .apptile, .btn, .card');
+      if (found.length) rows.push(found);
+    }
+    if (!rows.length) return false;
+
+    function locate() {
+      for (var r = 0; r < rows.length; r++) {
+        for (var c = 0; c < rows[r].length; c++) {
+          if (rows[r][c] === document.activeElement) return [r, c];
+        }
+      }
+      return null;
+    }
+
+    document.addEventListener('keydown', function (e) {
+      var at = locate();
+      if (!at) return;
+      var r = at[0], c = at[1];
+
+      if (e.keyCode === 39) c += 1;
+      else if (e.keyCode === 37) c -= 1;
+      else if (e.keyCode === 40) r += 1;
+      else if (e.keyCode === 38) r -= 1;
+      else return;
+
+      e.preventDefault();
+      if (r < 0 || r >= rows.length) return;
+      if (c < 0) c = 0;
+      if (c >= rows[r].length) c = rows[r].length - 1;
+      rows[r][c].focus();
+    });
+
+    rows[0][0].focus();
+    return true;
+  }
+
   function startArrowNav() {
+    var rowEls = document.querySelectorAll('[data-nav-row]');
+    if (rowEls.length && startRowNav(rowEls)) return;
+
     var grid = document.querySelector('.tiles') || document.querySelector('.appgrid');
-    var items = document.querySelectorAll('.tile, .card, .btn, .app, .home-link');
+    var items = document.querySelectorAll('.tile, .card, .btn, .app, .poster, .apptile, .home-link');
     if (!items.length) return;
 
     function columns() {

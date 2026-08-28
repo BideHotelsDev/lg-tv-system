@@ -314,6 +314,20 @@ This was a correction. The first attempt put explanatory notes and `PREVIEW — 
 
 **QR slots remain dashed placeholders**, never scannable codes — a guest who scans a fake code and gets nothing is worse served than one who sees no code.
 
+### 6.9 Screen furniture and artwork
+
+Lists of text tell a guest nothing about what watching or browsing feels like, so the browse screens are built the way a television expects: a hero band, horizontal rows of artwork, and row-aware navigation.
+
+**Navigation.** Left and right move along a row; up and down step between rows keeping roughly the same column; edges clamp rather than wrap. A flat index cannot do this because rows are different lengths, so rows are marked `data-nav-row` and `bide.js` walks them as a grid of ragged rows.
+
+**All artwork is inline SVG**, generated from the brand palette — stylised coast scenes for the NC500, interiors for eat & drink, and a hand-drawn map of the north coast. No photography, no map tiles, no provider logos, no external requests of any kind. This keeps the offline shell honest, works on Chromium 87 with no `aspect-ratio`, and costs nothing to serve.
+
+It is also the only defensible option: the restaurants are invented, so photographing them is impossible, and illustrating a real business we have not been to would be worse.
+
+**The map** (`/nc500/map/`) is a stylised coastline from Scrabster to Duncansby with the property marked and each place a focusable pin linking to its page. It is deliberately not survey-accurate — its job is to orient a guest who has just arrived and does not know which way the coast runs.
+
+**Streaming screens use provider names as labels only.** The app tiles say "BBC iPlayer" because that is which app opens; nothing imitates a provider's own interface, branding or artwork, and every programme title is invented. What the real app looks like inside is the provider's business, not bide's.
+
 ### 6.5 Scrolling
 
 Free scrolling with a D-pad is hostile. **Content pages are a vertical list of focusable cards; the page scrolls to follow focus.** The guest presses down, the next card takes focus, the page moves itself. They never scroll; they only move between things.

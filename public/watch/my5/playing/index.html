@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bide &middot; Netflix</title>
+<title>bide &middot; My5</title>
 <!-- DEV ONLY: replace with self-hosted TT Ramillas + Jost when Asa provides the files (spec 8.4) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="/assets/bide.css?v=2">
 </head>
-<body data-bide-page="app" data-bide-back="/watch/">
+<body data-bide-page="playing" data-bide-back="/watch/my5/">
 
 <div class="horizon"></div>
 
@@ -25,22 +25,17 @@
     <div class="status"><div class="clock" id="clock">--:--</div></div>
   </header>
 
-  <main class="stream">
-    <div class="hero a5">
-      <div class="hero-kicker">Netflix</div>
-      <div class="hero-title">Use your own account</div>
-      <p class="hero-sub">We do not keep sign-ins on this television. Cast from your phone and everything you already pay for appears here &mdash; then it is wiped when you check out.</p>
-    </div>
-    <div class="row" data-nav-row>
-      <a class="btn" href="/cast/">Cast from my phone</a>
-      <a class="btn btn--quiet" href="/watch/">Something else</a>
-    </div>
+  <main class="stage">
+    <div class="stage-kicker">My5 &middot; now playing</div>
+    <h1 class="stage-title">Harbour Lights</h1>
+    <p class="stage-sub">Press <b>Back</b> to return, or leave it running.</p>
+    <div class="loader"><i></i></div>
   </main>
 
   <footer class="footer">
-    <a class="home-link" href="/watch/">
+    <a class="home-link" href="/watch/my5/">
       <svg viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-      <span>Back to watch</span>
+      <span>Back to My5</span>
     </a>
     <div class="privacy">
       <svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7.5-7 9-4-1.5-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>

@@ -527,3 +527,208 @@ body[data-bide-page]:not([data-bide-page="welcome"]) .horizon{display:none}
 @media (prefers-reduced-motion:reduce){
   .loader i{animation:none;width:100%}
 }
+
+
+/* ============================================================
+   Streaming-style screens
+
+   Rows of artwork rather than lists of text, because a list of
+   titles tells you nothing about what watching feels like. All
+   artwork is generated from gradients — no provider logos, no real
+   programme art. These represent the SHAPE of the screen; the real
+   app interiors belong to the providers. Spec 6.9.
+   ============================================================ */
+
+:root{
+  --poster-w:15vw;
+  --poster-h:8.4vw;      /* 16:9. aspect-ratio is Chrome 88, we target 87 */
+  --tile-w:17vw;
+  --tile-h:9.6vw;
+}
+@media (max-width:1500px){
+  :root{--poster-w:17vw;--poster-h:9.5vw;--tile-w:19vw;--tile-h:10vw}
+  .hero{height:24vh;min-height:24vh;padding:2.4vh 3vw;margin-bottom:2.2vh}
+  .row{margin-bottom:2.2vh;padding-bottom:1.4vh}
+}
+
+/* the wide screen container for streaming layouts */
+.stream{
+  flex:1 1 auto;
+  overflow-y:auto;
+  padding-bottom:3vh;
+  margin:0 calc(var(--inset-x) * -1);
+  padding-left:var(--inset-x);
+  padding-right:var(--inset-x);
+}
+.stream::-webkit-scrollbar{width:0;height:0}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  height:32vh;min-height:32vh;
+  border-radius:1.4vh;
+  background:linear-gradient(90deg,#0f211a 0%,#16261f 55%,#1d332a 100%);
+  overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:3vh 3vw;
+  margin-bottom:3vh;
+}
+.hero::after{
+  content:"";position:absolute;left:0;right:0;top:0;bottom:0;
+  background:linear-gradient(90deg, rgba(15,33,26,.92) 0%, rgba(15,33,26,.72) 42%, rgba(15,33,26,.15) 100%);
+}
+.hero > *{position:relative;z-index:1}
+.hero-kicker{
+  font-size:var(--t-label);letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gorse);margin-bottom:1.2vh;
+}
+.hero-title{
+  font-family:var(--font-display);font-weight:340;
+  font-size:clamp(40px,6.4vh,86px);line-height:1.06;max-width:22ch;
+}
+.hero-sub{
+  margin-top:1.4vh;font-size:var(--t-tile-p);font-weight:300;
+  color:var(--stone-60);max-width:46ch;line-height:1.45;
+}
+
+/* ---------- rows ---------- */
+.row-label{
+  font-size:var(--t-label);letter-spacing:.3em;text-transform:uppercase;
+  color:var(--stone-35);margin:0 0 1.4vh;
+}
+.row{
+  display:flex;gap:1.2vw;
+  overflow-x:auto;overflow-y:hidden;
+  margin:0 calc(var(--inset-x) * -1) 3vh;
+  padding:1.4vh var(--inset-x) 2vh;
+  scroll-behavior:smooth;
+}
+.row::-webkit-scrollbar{height:0}
+
+.poster{
+  flex:0 0 auto;width:var(--poster-w);
+  text-decoration:none;color:inherit;outline:none;
+  transition:transform .18s ease;
+}
+.poster .art{
+  width:100%;height:var(--poster-h);
+  border-radius:1vh;border:1px solid transparent;
+  display:flex;align-items:flex-end;padding:.8vh;
+  transition:border-color .18s ease, box-shadow .18s ease;
+}
+.poster .cap{
+  margin-top:1vh;font-size:var(--t-tile-p);font-weight:400;
+  color:var(--stone-60);line-height:1.3;
+}
+.poster .sub{
+  font-size:calc(var(--t-tile-p) * .82);color:var(--stone-35);margin-top:.3vh;
+}
+.poster:hover,.poster:focus,.poster.is-focused{transform:translateY(-1.2vh)}
+.poster:hover .art,.poster:focus .art,.poster.is-focused .art{
+  border-color:var(--gorse);
+  box-shadow:0 0 0 .3vh rgba(250,179,12,.22);
+}
+.poster:hover .cap,.poster:focus .cap,.poster.is-focused .cap{color:var(--stone)}
+
+/* app tiles on the Watch launcher — wider, name burned in */
+.apptile{
+  flex:0 0 auto;width:var(--tile-w);
+  text-decoration:none;color:inherit;outline:none;
+  transition:transform .18s ease;
+}
+.apptile .art{
+  width:100%;height:var(--tile-h);
+  border-radius:1vh;border:1px solid var(--stone-14);
+  display:flex;align-items:center;justify-content:center;
+  font-size:var(--t-tile-h);font-weight:600;letter-spacing:.02em;
+  color:var(--stone);text-align:center;padding:0 1vw;
+  transition:border-color .18s ease, box-shadow .18s ease;
+}
+.apptile:hover,.apptile:focus,.apptile.is-focused{transform:translateY(-1.2vh)}
+.apptile:hover .art,.apptile:focus .art,.apptile.is-focused .art{
+  border-color:var(--gorse);box-shadow:0 0 0 .3vh rgba(250,179,12,.22);
+}
+
+/* generated artwork — no provider logos, no real programme art */
+.art{background:linear-gradient(135deg,#24382f 0%,#16241e 100%)}
+.a1{background:linear-gradient(135deg,#2f4a3c 0%,#101d18 100%)}
+.a2{background:linear-gradient(135deg,#3a4152 0%,#141821 100%)}
+.a3{background:linear-gradient(135deg,#5b4326 0%,#1d1610 100%)}
+.a4{background:linear-gradient(135deg,#27454b 0%,#101b1e 100%)}
+.a5{background:linear-gradient(135deg,#4a2f38 0%,#1a1114 100%)}
+.a6{background:linear-gradient(135deg,#3d4a2c 0%,#171c11 100%)}
+.a7{background:linear-gradient(135deg,#2b3550 0%,#111420 100%)}
+.a8{background:linear-gradient(135deg,#54452a 0%,#1c1710 100%)}
+
+.progress{
+  width:100%;height:.5vh;border-radius:.25vh;
+  background:rgba(249,248,243,.18);margin-top:.9vh;overflow:hidden;
+}
+.progress i{display:block;height:100%;background:var(--gorse)}
+
+@media (prefers-reduced-motion:reduce){
+  .poster,.apptile{transition:none}
+  .row{scroll-behavior:auto}
+}
+
+
+/* ============================================================
+   Illustrated artwork
+
+   Scenes and the map are inline SVG drawn from the brand palette.
+   No photography, no map tiles, no external requests — which keeps
+   the offline shell honest and works on Chromium 87. The places on
+   the map are real; the restaurants are not, so illustrating them
+   is also the only defensible option. Spec 6.9.
+   ============================================================ */
+
+.art{position:relative;overflow:hidden}
+.art > svg{
+  position:absolute;left:0;top:0;width:100%;height:100%;
+  display:block;
+}
+.apptile .art > svg{z-index:0}
+.apptile .art > span{position:relative;z-index:1}
+
+.hero{position:relative}
+.hero > svg.scene{
+  position:absolute;right:0;top:0;height:100%;width:auto;
+  display:block;z-index:0;
+  /* dissolve the left edge so the art melts into the panel instead of
+     sitting on it as a rectangle */
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 38%);
+}
+
+/* ---------- the map ---------- */
+.mapwrap{
+  flex:1 1 auto;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  min-height:0;
+}
+.mapwrap svg{width:100%;height:100%;max-height:62vh;display:block}
+
+.pin-hit{cursor:pointer;outline:none}
+.pin-dot{fill:var(--gorse);stroke:var(--fir-deep);stroke-width:1.2}
+.pin-ring{fill:none;stroke:var(--gorse);stroke-width:1.4;opacity:0}
+.pin-label{
+  fill:var(--stone-60);font-family:'Jost',sans-serif;font-weight:400;
+  font-size:7px;letter-spacing:.06em;
+}
+.pin-hit:hover .pin-ring,
+.pin-hit:focus .pin-ring,
+.pin-hit.is-focused .pin-ring{opacity:1}
+.pin-hit:hover .pin-label,
+.pin-hit:focus .pin-label,
+.pin-hit.is-focused .pin-label{fill:var(--gorse)}
+.pin-hit:hover .pin-dot,
+.pin-hit:focus .pin-dot,
+.pin-hit.is-focused .pin-dot{r:4.4}
+
+.here-dot{fill:var(--stone)}
+.here-label{fill:var(--stone);font-family:'Jost',sans-serif;font-size:7px;font-weight:500;letter-spacing:.1em}
+
+.map-legend{
+  flex:0 0 auto;margin-top:1.4vh;
+  font-size:var(--t-tile-p);color:var(--stone-35);
+}

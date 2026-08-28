@@ -3,8 +3,7 @@
 One URL per television, set once during installation as the browser home page
 (or the boot target, if the installer menu allows one — dev-kit item 1).
 
-Base URL: `https://the-view.tv.bidehotels.com`
-(until the DNS record below propagates, `https://guest-tv-production.up.railway.app` serves the same site)
+Base URL: `https://guest-tv-production.up.railway.app`
 
 | Room | Room name | Path |
 |---|---|---|
@@ -21,19 +20,8 @@ Base URL: `https://the-view.tv.bidehotels.com`
 So room 4 is configured as:
 
 ```
-https://the-view.tv.bidehotels.com/?r=hmws9kv
+https://guest-tv-production.up.railway.app/?r=hmws9kv
 ```
-
-## DNS
-
-The domain is registered with Railway and needs one record at the `bidehotels.com`
-registrar before it resolves:
-
-| Type | Name | Value |
-|---|---|---|
-| CNAME | `the-view.tv` | `9z46tv1w.up.railway.app` |
-
-Propagation can take up to 72 hours, though it is usually minutes.
 
 ## Why codes and not room numbers
 

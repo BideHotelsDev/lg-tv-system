@@ -76,8 +76,7 @@ An absent or unknown room degrades to the generic welcome — never an error.
 
 ## Deploying
 
-**Live:** https://the-view.tv.bidehotels.com *(pending one CNAME — `the-view.tv` → `9z46tv1w.up.railway.app`)*
-**Railway URL:** https://guest-tv-production.up.railway.app
+**Live:** https://guest-tv-production.up.railway.app
 
 Railway service `guest-tv` (project `lg-tv-system`, environment `staging`) is linked to this repo,
 so **`git push` to `main` deploys**. Railway builds the `Dockerfile` and runs

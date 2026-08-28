@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bide &middot; How it works</title>
+<title>bide &middot; Late checkout confirmed</title>
 <!-- DEV ONLY: replace with self-hosted TT Ramillas + Jost when Asa provides the files (spec 8.4) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="/assets/bide.css?v=2">
 </head>
-<body data-bide-page="cast-detail" data-bide-back="/cast/">
+<body data-bide-page="confirm" data-bide-back="/stay/" data-bide-next="/" data-bide-after="6">
 
 <div class="horizon"></div>
 <div class="horizon-glow"></div>
@@ -26,21 +26,16 @@
     <div class="status"><div class="clock" id="clock">--:--</div></div>
   </header>
 
-  <div class="page-head">
-    <h1 class="page-title">How it works</h1>
-    <p class="page-sub"></p>
-  </div>
-
-  <main class="detail">
-    <p>The television pairs with your phone over the room WiFi. Once paired, anything you can watch on your phone plays on the big screen &mdash; your Netflix, your Prime, your photos.</p>
-    <p>It is your account, not ours. We do not keep house logins on the television, which means nothing of yours is sitting here waiting for the next guest.</p>
+  <main class="stage">
+<div class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg></div>    <h1 class="stage-title">That&rsquo;s <em>sorted</em>.</h1>
+    <p class="stage-sub">Your room is yours until <b>1pm</b> tomorrow. Nothing else to do &mdash; we have updated your booking.</p>
+    <div class="returning" data-bide-countdown></div>
   </main>
 
-
   <footer class="footer">
-    <a class="home-link" href="/cast/">
+    <a class="home-link" href="/stay/">
       <svg viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-      <span>Back to casting</span>
+      <span>Back to your stay</span>
     </a>
     <div class="privacy">
       <svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7.5-7 9-4-1.5-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>

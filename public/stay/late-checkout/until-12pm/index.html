@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bide &middot; [Place name]</title>
+<title>bide &middot; Late checkout confirmed</title>
 <!-- DEV ONLY: replace with self-hosted TT Ramillas + Jost when Asa provides the files (spec 8.4) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="/assets/bide.css?v=2">
 </head>
-<body data-bide-page="eat-detail" data-bide-back="/eat/">
+<body data-bide-page="confirm" data-bide-back="/stay/" data-bide-next="/" data-bide-after="6">
 
 <div class="horizon"></div>
 <div class="horizon-glow"></div>
@@ -26,26 +26,16 @@
     <div class="status"><div class="clock" id="clock">--:--</div></div>
   </header>
 
-  <div class="page-head">
-    <h1 class="page-title">[Place name]</h1>
-    <p class="page-sub"></p>
-  </div>
-
-  <main class="detail">
-    <div class="draft-flag">Placeholder &mdash; content from David &amp; Samantha</div>
-    <p>[Two or three sentences in the bide voice.]</p>
-    <dl class="practical">
-      <div><dt>Walk</dt><dd>[minutes]</dd></div>
-      <div><dt>Booking</dt><dd>[advice]</dd></div>
-    </dl>
-    <div class="mock-note"><p>Duplicate this page for each recommendation, and add a matching card to the eat &amp; drink list.</p></div>
+  <main class="stage">
+<div class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg></div>    <h1 class="stage-title">That&rsquo;s <em>sorted</em>.</h1>
+    <p class="stage-sub">Your room is yours until <b>12pm</b> tomorrow. Nothing else to do &mdash; we have updated your booking.</p>
+    <div class="returning" data-bide-countdown></div>
   </main>
 
-
   <footer class="footer">
-    <a class="home-link" href="/eat/">
+    <a class="home-link" href="/stay/">
       <svg viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-      <span>Back to eat &amp; drink</span>
+      <span>Back to your stay</span>
     </a>
     <div class="privacy">
       <svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7.5-7 9-4-1.5-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>

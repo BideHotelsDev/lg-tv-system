@@ -36,9 +36,14 @@ public/
   index.html            welcome screen
   house/ nc500/ eat/ stay/     section pages — every card is a link
   house/heating/ nc500/dunnet-head/ ...   a detail page per card (spec 6.6)
-  stay/late-checkout/ ...      preview screens — every control responds
-                        with a toast and records to /debug/ (spec 6.8)
-  watch/preview/ cast/preview/ eat/preview/   previews of Phase 1c / 3 features
+  watch/<app>/          "Opening BBC iPlayer" — simulates the app launching
+  cast/paired/          pairing completes by itself, then confirms
+  eat/<place>/booked/   pick a sitting, get a confirmation
+  stay/late-checkout/until-1pm/ ...  confirmations that name what you chose
+
+The flow is a walkable prototype of the guest experience (spec 6.8). A small
+"Prototype" chip marks it; set demo:false in config/the-view.js to remove it
+along with the simulated responses.
   watch/ cast/          "how to" pages — these tiles cannot launch native
                         apps until Pro:Centric exists (spec 6.2)
   debug/                diagnostics, unlinked — there are no devtools on a hotel TV

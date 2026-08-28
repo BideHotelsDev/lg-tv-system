@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bide &middot; Ready to go, no sign-in</title>
+<title>bide &middot; Netflix</title>
 <!-- DEV ONLY: replace with self-hosted TT Ramillas + Jost when Asa provides the files (spec 8.4) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="/assets/bide.css?v=2">
 </head>
-<body data-bide-page="watch-detail" data-bide-back="/watch/">
+<body data-bide-page="opening" data-bide-back="/watch/">
 
 <div class="horizon"></div>
 <div class="horizon-glow"></div>
@@ -26,18 +26,12 @@
     <div class="status"><div class="clock" id="clock">--:--</div></div>
   </header>
 
-  <div class="page-head">
-    <h1 class="page-title">Ready to go, no sign-in</h1>
-    <p class="page-sub"></p>
-  </div>
-
-  <main class="detail">
-    <p>BBC iPlayer, ITVX, Channel 4 and My5 are all set up and waiting. Nothing to log into, nothing to set up &mdash; just open one and watch.</p>
-    <dl class="practical">
-      <div><dt>Ready</dt><dd>iPlayer &middot; ITVX &middot; Channel 4 &middot; My5</dd></div>
-    </dl>
+  <main class="stage">
+    <div class="stage-kicker">Opening</div>
+    <h1 class="stage-title">Netflix</h1>
+    <p class="stage-sub">Sign in with your own account by casting from your phone.</p>
+    <div class="loader"><i></i></div>
   </main>
-
 
   <footer class="footer">
     <a class="home-link" href="/watch/">

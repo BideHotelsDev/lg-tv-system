@@ -11,7 +11,7 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="/assets/bide.css?v=2">
 </head>
-<body data-bide-page="preview" data-bide-back="/stay/">
+<body data-bide-page="stay-detail" data-bide-back="/stay/">
 
 <div class="horizon"></div>
 <div class="horizon-glow"></div>
@@ -32,17 +32,13 @@
   </div>
 
   <main class="detail">
-    <div class="draft-flag">Preview &mdash; contact route to be confirmed</div>
-    <p>There is no front desk at The View, but there is always someone on the end of a message, and we come back quickly.</p>
-    <p>Scan to carry on the conversation on your own phone &mdash; easier than typing with a remote.</p>
-    <div class="qr-slot">The pairing code<br>appears here</div>
+    <p>There is no front desk at The View, but there is always someone on the end of a message. Pick one below, or scan to carry on the conversation on your own phone.</p>
     <div class="btn-row">
-      <button class="btn" data-mock="Request sent. In Phase 3 this raises an ops task in MEWS.">More towels</button>
-      <button class="btn btn--quiet" data-mock="Takes you to the late checkout request.">Late checkout</button>
-      <button class="btn btn--quiet" data-mock="Request sent. In Phase 3 this messages the team.">A recommendation</button>
+      <a class="btn" href="/stay/message-us/sent/">More towels, please</a>
+      <a class="btn btn--quiet" href="/stay/message-us/sent/">Somewhere to eat tonight</a>
+      <a class="btn btn--quiet" href="/stay/message-us/sent/">Something is not right</a>
     </div>
-
-    <div class="mock-note"><p>The contact route is still to be confirmed by David &mdash; most likely a WhatsApp number rendered as the QR above. The one-press buttons exist because they need no typing at all; anything needing words hands off to the phone.</p></div>
+    <div class="qr-slot">Scan to message<br>from your phone</div>
   </main>
 
   <footer class="footer">

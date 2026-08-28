@@ -11,7 +11,7 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="/assets/bide.css?v=2">
 </head>
-<body data-bide-page="preview" data-bide-back="/stay/">
+<body data-bide-page="stay-detail" data-bide-back="/stay/">
 
 <div class="horizon"></div>
 <div class="horizon-glow"></div>
@@ -28,23 +28,16 @@
 
   <div class="page-head">
     <h1 class="page-title">Late <em>checkout</em></h1>
-    <p class="page-sub">Ask the evening before and we will tell you straight away.</p>
+    <p class="page-sub">Stay a little longer tomorrow.</p>
   </div>
 
   <main class="detail">
-    <div class="draft-flag">Preview &mdash; Phase 3, needs MEWS</div>
-    <p>Checkout is at <strong data-bide="checkout-time">11am</strong>. If you would like longer, ask and we will tell you straight away whether the room is free.</p>
-    <dl class="practical">
-      <div><dt>Your checkout</dt><dd><span data-bide="checkout-time">11am</span></dd></div>
-      <div><dt>Tomorrow</dt><dd>Room appears free</dd></div>
-      <div><dt>Fee</dt><dd>[To be set by David]</dd></div>
-    </dl>
+    <p>Checkout is at <strong data-bide="checkout-time">11am</strong>. The room is free tomorrow, so you can have a little longer if you would like it.</p>
     <div class="btn-row">
-      <button class="btn" data-mock="Request sent. In Phase 3 this checks availability in MEWS and raises an ops task.">Request 1pm checkout</button>
-      <button class="btn btn--quiet" data-mock="Opens a message to the team. In Phase 3 this hands off to the guest phone by QR.">Ask for something else</button>
+      <a class="btn" href="/stay/late-checkout/until-12pm/">Stay until 12pm</a>
+      <a class="btn btn--quiet" href="/stay/late-checkout/until-1pm/">Until 1pm</a>
+      <a class="btn btn--quiet" href="/stay/late-checkout/until-2pm/">Until 2pm</a>
     </div>
-
-    <div class="mock-note"><p>&ldquo;Room appears free&rdquo; above is illustrative &mdash; real availability comes from MEWS in Phase 2. The fee is still to be set by David, and is listed as an open item in the scope pack.</p></div>
   </main>
 
   <footer class="footer">

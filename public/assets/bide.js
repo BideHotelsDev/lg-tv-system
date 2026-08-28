@@ -240,6 +240,68 @@
   }
 
   /* ---------------------------------------------------------
+     Prototype marker
+
+     A small corner chip, drawn only while config.demo is true. It is
+     the one thing that breaks the illusion, and it is deliberate: a
+     prototype that is indistinguishable from a live system is how a
+     guest ends up trusting a screen that cannot do anything. Set
+     demo:false in the property config and it disappears along with
+     every simulated response.
+     --------------------------------------------------------- */
+  function startDemoChip() {
+    if (!CFG.demo) return;
+    var chip = document.createElement('div');
+    chip.className = 'demo-chip';
+    chip.textContent = 'Prototype';
+    document.body.appendChild(chip);
+  }
+
+  /* ---------------------------------------------------------
+     Screens that move on by themselves
+
+     An "opening BBC iPlayer" screen or a confirmation is a moment,
+     not a destination. data-bide-next says where to go and
+     data-bide-after says how many seconds to linger, which is what
+     makes the flow feel like a product rather than a set of pages.
+     Any key press skips the wait.
+     --------------------------------------------------------- */
+  function startAutoAdvance() {
+    var next = document.body.getAttribute('data-bide-next');
+    if (!next) return;
+
+    var seconds = parseInt(document.body.getAttribute('data-bide-after'), 10);
+    if (isNaN(seconds)) seconds = 5;
+
+    var label = document.querySelector('[data-bide-countdown]');
+    var timer = null;
+    var done = false;
+
+    function go() {
+      if (done) return;
+      done = true;
+      window.clearInterval(timer);
+      window.location.href = next;
+    }
+
+    function tick() {
+      seconds -= 1;
+      if (label) {
+        label.textContent = seconds > 0
+          ? 'Back in ' + seconds + '\u2026'
+          : 'Taking you back\u2026';
+      }
+      if (seconds <= 0) go();
+    }
+
+    if (label) label.textContent = 'Back in ' + seconds + '\u2026';
+    timer = window.setInterval(tick, 1000);
+
+    document.addEventListener('keydown', function () { go(); });
+    document.addEventListener('click', function () { go(); });
+  }
+
+  /* ---------------------------------------------------------
      Back key -> home
      LG's remote sends 461; browsers also surface Backspace and
      Escape depending on context. Handle all three rather than
@@ -314,6 +376,8 @@
     try { startFocus(); } catch (e) {}
     try { startArrowNav(); } catch (e) {}
     try { startMockActions(); } catch (e) {}
+    try { startDemoChip(); } catch (e) {}
+    try { startAutoAdvance(); } catch (e) {}
     try { startBackKey(); } catch (e) {}
     try { startIdleRefresh(); } catch (e) {}
     try { startServiceWorker(); } catch (e) {}

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bide &middot; Eat &amp; drink</title>
+<title>bide &middot; Paired</title>
 <!-- DEV ONLY: replace with self-hosted TT Ramillas + Jost when Asa provides the files (spec 8.4) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="/assets/bide.css?v=2">
 </head>
-<body data-bide-page="eat" data-bide-back="/">
+<body data-bide-page="confirm" data-bide-back="/" data-bide-next="/" data-bide-after="6">
 
 <div class="horizon"></div>
 <div class="horizon-glow"></div>
@@ -26,30 +26,10 @@
     <div class="status"><div class="clock" id="clock">--:--</div></div>
   </header>
 
-  <div class="page-head">
-    <h1 class="page-title">Eat &amp; <em>drink</em></h1>
-    <p class="page-sub">Where we&rsquo;d send our own family.</p>
-  </div>
-
-  <main class="cards">
-    <a class="card" href="/eat/harbour-room/">
-      <svg class="go" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-      <h3>The Harbour Room</h3>
-      <p>Seafood, five minutes down the hill.</p>
-      <span class="meta">5 minute walk &middot; book ahead</span>
-    </a>
-    <a class="card" href="/eat/shore-street-kitchen/">
-      <svg class="go" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-      <h3>Shore Street Kitchen</h3>
-      <p>Breakfast and long lunches, two doors along.</p>
-      <span class="meta">2 minute walk &middot; no booking</span>
-    </a>
-    <a class="card" href="/eat/bridge-street-bakehouse/">
-      <svg class="go" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-      <h3>Bridge Street Bakehouse</h3>
-      <p>Take something with you up the coast.</p>
-      <span class="meta">8 minute walk &middot; morning only</span>
-    </a>
+  <main class="stage">
+<div class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg></div>    <h1 class="stage-title">Paired.</h1>
+    <p class="stage-sub">Your phone is connected to this television for the rest of your stay. Everything is cleared when you check out.</p>
+    <div class="returning" data-bide-countdown></div>
   </main>
 
   <footer class="footer">

@@ -454,3 +454,76 @@ body[data-bide-page]:not([data-bide-page="welcome"]) .horizon{display:none}
   .btn,.app{transition:none}
   .toast{transition:opacity .01s}
 }
+
+
+/* ============================================================
+   Prototype flow
+   These screens simulate the guest experience end to end so the
+   flow can be walked and felt before any of it is wired up. The
+   only thing breaking the illusion is a small corner marker, so
+   nobody can mistake a prototype for a live system. Spec 6.8.
+   ============================================================ */
+
+.demo-chip{
+  position:fixed;top:1.2vh;left:50%;transform:translateX(-50%);z-index:9;
+  padding:.5vh 1vw;border:1px solid var(--stone-14);border-radius:.5vh;
+  font-size:clamp(11px,1.3vh,16px);letter-spacing:.24em;text-transform:uppercase;
+  color:var(--stone-35);background:rgba(25,29,27,.55);
+  pointer-events:none;
+}
+
+/* full-screen moments: opening an app, confirming a request */
+.stage{
+  flex:1 1 auto;
+  display:flex;flex-direction:column;justify-content:center;
+  max-width:78ch;
+}
+.stage-kicker{
+  font-size:var(--t-label);letter-spacing:.38em;text-transform:uppercase;
+  color:var(--stone-35);margin-bottom:2vh;
+}
+.stage-title{
+  font-family:var(--font-display);font-weight:340;
+  font-size:clamp(56px,9vh,128px);line-height:1.05;letter-spacing:-0.005em;
+}
+.stage-title em{font-style:normal;color:var(--gorse)}
+.stage-sub{
+  margin-top:2.6vh;font-size:var(--t-sub);font-weight:300;
+  color:var(--stone-60);line-height:1.5;max-width:56ch;
+}
+.stage-sub b{color:var(--stone);font-weight:500}
+
+/* the thin progress line under an "opening" screen */
+.loader{
+  margin-top:4vh;width:26vw;height:.4vh;border-radius:.2vh;
+  background:var(--stone-14);overflow:hidden;
+}
+.loader i{
+  display:block;height:100%;width:38%;background:var(--gorse);
+  animation:slide 1.15s ease-in-out infinite;
+}
+@keyframes slide{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(360%)}
+}
+
+.tick{
+  width:9vh;height:9vh;margin-bottom:2.6vh;
+  border-radius:50%;border:1px solid var(--gorse);
+  display:flex;align-items:center;justify-content:center;
+}
+.tick svg{width:4.4vh;height:4.4vh;stroke:var(--gorse);fill:none;stroke-width:1.6}
+
+.returning{
+  margin-top:3.4vh;font-size:var(--t-tile-p);color:var(--stone-35);
+}
+
+/* a place, on the eat & drink pages */
+.place-meta{
+  margin-top:1.6vh;font-size:var(--t-label);letter-spacing:.2em;
+  text-transform:uppercase;color:var(--stone-35);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .loader i{animation:none;width:100%}
+}

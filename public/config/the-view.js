@@ -9,6 +9,12 @@
    ============================================================ */
 
 window.BIDE = {
+
+  /* Prototype mode. While true the flow simulates responses so it can
+     be walked end to end, and a small "Prototype" chip sits in the
+     corner. Set to false before any of this faces a real guest. */
+  demo: true,
+
   property: {
     name: 'The View',
     location: 'Thurso',

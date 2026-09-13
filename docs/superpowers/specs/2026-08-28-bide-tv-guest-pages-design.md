@@ -222,7 +222,7 @@ Railway, per §5.2 of the scope pack, serving static files through Caddy in a co
 
 A bide subdomain becomes worth doing when the pages face real guests, and Phase 5 replication is the moment it starts paying: one subdomain per property keeps content, config and deploys from colliding.
 
-The generated hostname was originally `guest-tv-production.up.railway.app` and was renamed to `the-view.up.railway.app` in the Railway dashboard. The old name returns Railway's "Application not found" page, so the URL above is the only one to configure on a television. A custom domain `the-view.tv.bidehotels.com` is also attached to the service but has no DNS record yet and does not resolve.
+The generated hostname was originally `guest-tv-production.up.railway.app` and was renamed to `the-view.up.railway.app` in the Railway dashboard. The old name returns Railway's "Application not found" page, so the URL above is the only one to configure on a television. No custom domain is attached; the `the-view.tv.bidehotels.com` domain was removed from the service on 2026-09-13, never having had a DNS record.
 
 **Deployment is a push.** The service builds from GitHub, so `git push` to `main` deploys. That matters here because the content workflow is "David messages Kyle, Kyle edits" &mdash; there is no separate deploy step to forget.
 

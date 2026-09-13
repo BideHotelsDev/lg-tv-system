@@ -79,6 +79,8 @@
       if (value) nodes[i].textContent = value;
     }
 
+    roomPhoto(entry);
+
     /* The room line only makes sense when we know the room.
        No room -> the generic welcome. Not an error, just less personal. */
     var roomLines = document.querySelectorAll('[data-bide-room-line]');
@@ -89,6 +91,36 @@
         roomLines[j].parentNode.removeChild(roomLines[j]);
       }
     }
+  }
+
+  /* ---------------------------------------------------------
+     The room's own view
+
+     The welcome screen carries a photograph of the place the room is
+     named after. It is decoration, and it is treated like decoration:
+     the image is created in script and only revealed once the browser
+     says it decoded, so a slow or missing file never leaves a grey
+     rectangle sitting behind the greeting. No room, no photo, no gap.
+
+     Image() rather than markup in the page, because the filename comes
+     from the room and the room is not known until this runs.
+     --------------------------------------------------------- */
+  function roomPhoto(entry) {
+    var slot = document.querySelector('[data-bide-room-photo]');
+    if (!slot) return;
+
+    var photos = CFG.photos || {};
+    var file = (entry && entry.photo) || photos.fallback;
+    if (!file) return;
+
+    var img = new Image();
+    img.className = 'ph';
+    img.alt = '';
+    img.onload = function () {
+      slot.insertBefore(img, slot.firstChild);
+      slot.className += ' is-shown';
+    };
+    img.src = (photos.base || '/assets/seed/') + file;
   }
 
   /* ---------------------------------------------------------
@@ -113,9 +145,24 @@
      The browser's own focus handling does the moving; this only
      paints it, so arrow keys still work if the script dies.
      --------------------------------------------------------- */
+  /* .pin-hit is a map pin. It belongs here for the same reason the rest
+     do: the map page tells the guest to move with the arrows and press
+     OK, and until the pins were on this list that instruction was not
+     true — the pins were reachable by Tab, which no remote has. */
   function focusables() {
-    return document.querySelectorAll('.tile, .card, .btn, .app, .poster, .apptile, .home-link');
+    return document.querySelectorAll('.tile, .card, .btn, .app, .poster, .apptile, .pin-hit, .home-link');
   }
+
+  /* Focusing something scrolls it into view, which is right every time
+     the guest presses an arrow and wrong the one time we do it
+     ourselves. On a page whose only button sits below the text, the
+     opening focus dragged the page up and the guest arrived at a screen
+     with the first paragraph already sliced off under the title. Nobody
+     had moved yet, so nothing should have moved.
+
+     Both startFocus and startRowNav focus their first item, so this
+     stays true until the pair of them are done. */
+  var settling = true;
 
   function startFocus() {
     var items = focusables();
@@ -125,7 +172,7 @@
       (function (el) {
         el.addEventListener('focus', function () {
           el.classList.add('is-focused');
-          if (el.scrollIntoView) {
+          if (!settling && el.scrollIntoView) {
             el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
           }
         });
@@ -135,8 +182,8 @@
     }
 
     /* Focus is never lost and never invisible. */
-    var first = document.querySelector('.tile, .card, .btn, .app, .poster, .apptile');
-    if (first) first.focus();
+    var first = document.querySelector('.tile, .card, .btn, .app, .poster, .apptile, .pin-hit');
+    if (first) first.focus({ preventScroll: true });
   }
 
   /* ---------------------------------------------------------
@@ -156,11 +203,17 @@
   /* Row-based navigation for the streaming screens: left and right move
      along a row, up and down step between rows keeping roughly the same
      position. This is what a remote expects, and a flat index cannot do
-     it because rows are different lengths. */
+     it because rows are different lengths.
+
+     A row of buttons on a detail page is a row for this purpose too, and
+     has to say so. Without the marker those pages fall through to the
+     single-column path below, where left and right are ignored outright
+     — which on a screen offering three checkout times laid out side by
+     side meant only the first one could be reached. */
   function startRowNav(rowEls) {
     var rows = [];
     for (var r = 0; r < rowEls.length; r++) {
-      var found = rowEls[r].querySelectorAll('.poster, .apptile, .btn, .card');
+      var found = rowEls[r].querySelectorAll('.poster, .apptile, .btn, .card, .pin-hit');
       if (found.length) rows.push(found);
     }
     if (!rows.length) return false;
@@ -192,7 +245,7 @@
       rows[r][c].focus();
     });
 
-    rows[0][0].focus();
+    rows[0][0].focus({ preventScroll: true });
     return true;
   }
 
@@ -201,7 +254,7 @@
     if (rowEls.length && startRowNav(rowEls)) return;
 
     var grid = document.querySelector('.tiles') || document.querySelector('.appgrid');
-    var items = document.querySelectorAll('.tile, .card, .btn, .app, .poster, .apptile, .home-link');
+    var items = document.querySelectorAll('.tile, .card, .btn, .app, .poster, .apptile, .pin-hit, .home-link');
     if (!items.length) return;
 
     function columns() {
@@ -304,7 +357,15 @@
      every simulated response.
      --------------------------------------------------------- */
   function startDemoChip() {
-    if (!CFG.demo) return;
+    /* Notes that only make sense while this is a prototype come out
+       with the chip, rather than being left behind to puzzle a guest. */
+    if (!CFG.demo) {
+      var notes = document.querySelectorAll('[data-bide-demo-note]');
+      for (var n = 0; n < notes.length; n++) {
+        notes[n].parentNode.removeChild(notes[n]);
+      }
+      return;
+    }
     var chip = document.createElement('div');
     chip.className = 'demo-chip';
     chip.textContent = 'Prototype';
@@ -429,6 +490,7 @@
     try { startClock(); } catch (e) {}
     try { startFocus(); } catch (e) {}
     try { startArrowNav(); } catch (e) {}
+    settling = false;
     try { startMockActions(); } catch (e) {}
     try { startDemoChip(); } catch (e) {}
     try { startAutoAdvance(); } catch (e) {}

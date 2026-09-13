@@ -16,20 +16,21 @@
    The View (spec 10.4).
    ============================================================ */
 
-var CACHE = 'bide-tv-v2';
+var CACHE = 'bide-tv-v19';
 
 var SHELL = [
   '/',
   '/house/',
   '/nc500/',
   '/eat/',
+  '/eat/map/',
   '/stay/',
   '/watch/',
   '/cast/',
   '/offline.html',
-  '/assets/bide.css?v=2',
-  '/assets/bide.js?v=2',
-  '/config/the-view.js?v=2'
+  '/assets/bide.css?v=19',
+  '/assets/bide.js?v=19',
+  '/config/the-view.js?v=19'
 ];
 
 self.addEventListener('install', function (event) {
@@ -74,6 +75,32 @@ self.addEventListener('fetch', function (event) {
              JavaScript, not from the HTML, so any cached copy is correct. */
           return cache.match(req, { ignoreSearch: true }).then(function (hit) {
             return hit || cache.match('/offline.html');
+          });
+        });
+      })
+    );
+    return;
+  }
+
+  /* Photographs: cache first, and never revalidated.
+     A seed photograph is immutable — the filename changes when the
+     picture does, because the property config names the file. Putting
+     them through stale-while-revalidate would refetch several hundred
+     kilobytes on every page load of a television that is already showing
+     the right image, over a hotel's broadband, for nothing.
+
+     They are deliberately NOT in SHELL: precaching three megabytes of
+     photographs on install would make the first load of the welcome
+     screen wait for pictures nobody has asked to see yet. They arrive as
+     they are used, and are there from then on. */
+  if (req.url.indexOf('/assets/seed/') !== -1) {
+    event.respondWith(
+      caches.open(CACHE).then(function (cache) {
+        return cache.match(req).then(function (hit) {
+          if (hit) return hit;
+          return fetch(req).then(function (res) {
+            if (res && res.status === 200) cache.put(req, res.clone());
+            return res;
           });
         });
       })

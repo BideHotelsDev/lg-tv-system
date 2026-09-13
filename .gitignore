@@ -2,3 +2,7 @@ node_modules/
 .playwright-mcp/
 *.png
 .DS_Store
+
+# Working files for tools/seed and tools/map — full-size originals and
+# cached Overpass responses. Regenerated on demand; never deployed.
+.seed-tmp/

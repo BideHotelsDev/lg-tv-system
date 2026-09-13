@@ -216,13 +216,13 @@ Railway, per §5.2 of the scope pack, serving static files through Caddy in a co
 | Repository | `BideHotelsDev/lg-tv-system` |
 | Railway project | `lg-tv-system` &middot; environment `staging` |
 | Service | `guest-tv`, linked to the GitHub repo |
-| URL | https://guest-tv-production.up.railway.app |
+| URL | https://the-view.up.railway.app |
 
 **Railway's own hostname, deliberately &mdash; no bide domain yet.** While this is a prototype pointed at the dev kit there is nothing to gain from a branded hostname, and a guest never sees a URL in any case: the address is configured once per television and the browser chrome is locked down.
 
 A bide subdomain becomes worth doing when the pages face real guests, and Phase 5 replication is the moment it starts paying: one subdomain per property keeps content, config and deploys from colliding.
 
-Note the generated hostname contains the word *production* while the environment is named `staging`. It was generated before the rename and is only a label; the environment is the thing that matters.
+The generated hostname was originally `guest-tv-production.up.railway.app` and was renamed to `the-view.up.railway.app` in the Railway dashboard. The old name returns Railway's "Application not found" page, so the URL above is the only one to configure on a television. A custom domain `the-view.tv.bidehotels.com` is also attached to the service but has no DNS record yet and does not resolve.
 
 **Deployment is a push.** The service builds from GitHub, so `git push` to `main` deploys. That matters here because the content workflow is "David messages Kyle, Kyle edits" &mdash; there is no separate deploy step to forget.
 
@@ -346,6 +346,18 @@ It is also the only defensible option: the restaurants are invented, so photogra
 **The map** (`/nc500/map/`) is a stylised coastline from Scrabster to Duncansby with the property marked and each place a focusable pin linking to its page. It is deliberately not survey-accurate — its job is to orient a guest who has just arrived and does not know which way the coast runs.
 
 **Streaming screens use provider names as labels only.** The app tiles say "BBC iPlayer" because that is which app opens; nothing imitates a provider's own interface, branding or artwork, and every programme title is invented. What the real app looks like inside is the provider's business, not bide's.
+
+> **Amended in the prototype — 5 September 2026.** Two of the rules above have been relaxed for the dev-kit build, and the README records how to reverse either.
+>
+> **Photography, on the NC500 pages and the welcome screen only.** The reasoning above holds where it was aimed: the invented restaurants and the house guide still use the drawn scenes, because a stock photograph captioned "The Harbour Room" would assert something untrue about a business that does not exist. It does not hold for Dunnet Head, which is real, twenty minutes away, and the thing the page is trying to get a guest to go and see. The photographs are licensed (CC0/CC BY/CC BY-SA, credited in `public/assets/seed/CREDITS.md`), self-hosted, and cached by the service worker, so "no external requests of any kind" is still true. Each of the nine rooms shows the place it is named after rather than a bedroom, for the same reason the restaurants are still drawn.
+>
+> **The map is now survey-accurate.** Coastline, islands and the A836/A99 are traced from OpenStreetMap and the pins sit at real coordinates. It is still inline SVG, still no tiles and still no request from the television — the tracing happens once, on a laptop, in `tools/map/build.mjs`. The clause it replaces argued that accuracy was unnecessary for orienting a guest; it turned out to be no harder to have, and a guest who can see that Duncansby really is forty minutes further on is better oriented, not worse.
+>
+> **The eat & drink places are now real**, and the spec's reasoning for inventing them is the reason this is only half a change. Names, streets and walking distances come from OpenStreetMap, so they are checkable; nothing on the pages ranks or recommends, and the booking button is gone in favour of asking the front desk, because a prototype cannot confirm a table on a real restaurant's behalf. Which four places The View actually sends guests to is still David and Samantha's to decide, and until they do, §6.9's objection stands.
+>
+> **Watch names four real Netflix originals.** Names only, in our own type, with no key art, no wordmark and no imitation of the provider's interface — the part of §6.9 that matters is untouched. The hero programme is still invented, which is what lets it carry a real photograph.
+>
+> **The stylesheet now has a phone and tablet layout** below 1100px. No television reports a viewport that narrow, so §4.2's two calibration targets are unaffected.
 
 ### 6.5 Scrolling
 

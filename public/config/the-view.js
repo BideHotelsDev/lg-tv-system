@@ -48,17 +48,41 @@ window.BIDE = {
      own device or verified server-side — see spec 6.7 and 7.1.
 
      Codes avoid 0/O/1/l/I, because they get read off a screen and typed
-     into an installer menu by hand. */
+     into an installer menu by hand.
+
+     `photo` is the backdrop on the welcome screen, from /assets/seed/.
+     Every room here is named after somewhere you can see, or nearly see,
+     from the building, so the seed photograph is that place rather than
+     a picture of a bedroom. Stock photographs of somebody else's hotel
+     room would say something untrue about this one; a photograph of the
+     Pentland Firth in room 4 does not.
+
+     When The View sends its own room photography, drop the files into
+     /assets/seed/ and change the filenames here. Nothing else changes.
+     A room with no photo, or a file that fails to load, simply gets the
+     plain welcome screen. */
   rooms: {
-    'dyh28yp': { number: '1', name: 'The Dunnet' },
-    '8gjzty7': { number: '2', name: 'The Scrabster' },
-    'c5f9a5z': { number: '3', name: 'The Holborn' },
-    'hmws9kv': { number: '4', name: 'The Pentland' },
-    'rbsg3ek': { number: '5', name: 'The Stroma' },
-    'zvfm59f': { number: '6', name: 'The Castlehill' },
-    'r5btnxd': { number: '7', name: 'The Brims' },
-    'ttt8sp7': { number: '8', name: 'The Sandside' },
-    'nx2kts7': { number: '9', name: 'The Ness' }
+    'dyh28yp': { number: '1', name: 'The Dunnet',     photo: 'dunnet-bay-wide.jpg' },
+    '8gjzty7': { number: '2', name: 'The Scrabster',  photo: 'scrabster-harbour-wide.jpg' },
+    'c5f9a5z': { number: '3', name: 'The Holborn',    photo: 'holborn-head-wide.jpg' },
+    'hmws9kv': { number: '4', name: 'The Pentland',   photo: 'pentland-firth-wide.jpg' },
+    'rbsg3ek': { number: '5', name: 'The Stroma',     photo: 'stroma-wide.jpg' },
+    'zvfm59f': { number: '6', name: 'The Castlehill', photo: 'castlehill-wide.jpg' },
+    'r5btnxd': { number: '7', name: 'The Brims',      photo: 'brims-wide.jpg' },
+    'ttt8sp7': { number: '8', name: 'The Sandside',   photo: 'sandside-wide.jpg' },
+    'nx2kts7': { number: '9', name: 'The Ness',       photo: 'thurso-ness-wide.jpg' }
+  },
+
+  /* Where the seed photographs live. Self-hosted, always: an external
+     image host would be one more thing that has to be up for the welcome
+     screen to look finished. */
+  photos: {
+    base: '/assets/seed/',
+    /* A set with no room code still gets a welcome screen, and it may as
+       well be the view the property is named for: the Pentland Firth at
+       dawn. It is the room LINE that disappears when the room is unknown,
+       not the picture — nothing here claims to know which room this is. */
+    fallback: 'muckle-skerry-wide.jpg'
   },
 
   /* Phase 5 replication: recolour the horizon motif per property.

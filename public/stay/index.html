@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,420;9..144,560&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="/assets/bide.css?v=2">
+<link rel="stylesheet" href="/assets/bide.css?v=19">
 </head>
 <body data-bide-page="stay" data-bide-back="/">
 
@@ -26,42 +26,47 @@
   </header>
 
   <main class="stream">
-    <div class="hero"><svg class="scene" viewBox="0 0 160 90" preserveAspectRatio="xMaxYMid meet" aria-hidden="true"><defs><linearGradient id="sroom" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22403a"/><stop offset="1" stop-color="#0f211a"/></linearGradient></defs><rect width="160" height="90" fill="url(#sroom)"/><rect x="14" y="16" width="46" height="34" rx="2" fill="#20302a"/><rect x="18" y="20" width="38" height="26" fill="#FAB30C" opacity=".16"/><line x1="37" y1="20" x2="37" y2="46" stroke="#16241e" stroke-width="1.4"/><line x1="18" y1="36" x2="56" y2="36" stroke="#FAB30C" stroke-width=".9" opacity=".55"/><rect x="74" y="52" width="70" height="6" rx="2" fill="#3a2e21"/><rect x="74" y="58" width="70" height="16" rx="2" fill="#2a3830"/><rect x="80" y="44" width="22" height="10" rx="3" fill="#F9F8F3" opacity=".85"/><rect x="140" y="46" width="3" height="12" fill="#3a2e21"/><path d="M136 46 h11 l-2-6 h-7 z" fill="#FAB30C" opacity=".8"/></svg>
+
+    <!-- Drawn, not photographed. The room photographs are horizons, and a
+         horizon cropped into a band this wide is a strip of sky over a strip
+         of sea with nothing in the middle of it. This is the same room the
+         old artwork showed, in the line hand the house guide uses: bed,
+         window, lamp, and the one gorse mark that says the light is on. -->
+    <div class="hero">
+      <svg class="scene elevation" viewBox="0 0 160 90" preserveAspectRatio="xMaxYMid meet" aria-hidden="true"><g fill="none" stroke="#F9F8F3" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity=".38"><path d="M28 74h104"/><path d="M46 74V54h44v20"/><path d="M46 58h44"/><path d="M50 54v-4h11v4"/><path d="M100 74V63h22v11"/><path d="M100 66.5h22"/><path d="M104 63v-3h3v3"/><path d="M118 63v-3h3v3"/><path d="M96 30h30v22H96z"/><path d="M111 30v22M96 41h30"/><path d="M134 74V57"/><path d="M128.5 57h11l-2.5-7h-6z"/></g><g fill="none" stroke="#FAB30C" stroke-width="1" stroke-linecap="round" opacity=".5"><path d="M134 59.5v4"/></g></svg>
       <div class="hero-kicker">Your stay</div>
       <div class="hero-title">Make yourself at <em>home</em></div>
       <p class="hero-sub"><span data-bide-room-line>Room <b data-bide="room-number"></b> &middot; <span class="accent" data-bide="room-name"></span>. </span>Checkout is at <b data-bide="checkout-time">11am</b>.</p>
     </div>
+
     <div class="row-label">Anything you need</div>
     <div class="row" data-nav-row>
       <a class="poster" href="/stay/late-checkout/">
-        <div class="art"><svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="skey" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24413a"/><stop offset="1" stop-color="#0f211a"/></linearGradient></defs><rect width="160" height="90" fill="url(#skey)"/><g fill="#FAB30C" opacity=".9"><circle cx="52" cy="45" r="13"/></g><circle cx="52" cy="45" r="5" fill="#0f211a"/><rect x="64" y="41" width="52" height="8" rx="2" fill="#FAB30C" opacity=".9"/><rect x="100" y="49" width="6" height="9" fill="#FAB30C" opacity=".9"/><rect x="110" y="49" width="6" height="6" fill="#FAB30C" opacity=".9"/></svg></div>
+        <div class="art"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.2" r="8"/><path d="M12 8.6v4.6l3.2 1.9"/><path d="M4.6 5.6 7.8 3.2"/><path d="M19.4 5.6 16.2 3.2"/></svg></div>
         <div class="cap">Late checkout</div>
         <div class="sub">Stay a little longer tomorrow</div>
       </a>
       <a class="poster" href="/stay/message-us/">
-        <div class="art"><svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="smessage" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#20382f"/><stop offset="1" stop-color="#0f211a"/></linearGradient></defs><rect width="160" height="90" fill="url(#smessage)"/><rect x="26" y="24" width="60" height="30" rx="6" fill="#F9F8F3" opacity=".9"/><path d="M38 54 l0 10 l11-10 z" fill="#F9F8F3" opacity=".9"/><g stroke="#191d1b" stroke-width="2" opacity=".3"><line x1="34" y1="34" x2="72" y2="34"/><line x1="34" y1="42" x2="62" y2="42"/></g><rect x="76" y="46" width="56" height="26" rx="6" fill="#FAB30C" opacity=".85"/><path d="M120 72 l0 9 l-11-9 z" fill="#FAB30C" opacity=".85"/><g stroke="#191d1b" stroke-width="2" opacity=".35"><line x1="84" y1="55" x2="118" y2="55"/><line x1="84" y1="63" x2="104" y2="63"/></g></svg></div>
+        <div class="art"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8.6" cy="8" r="3.2"/><path d="M2.8 19.8c0-3.2 2.6-5.2 5.8-5.2 1.2 0 2.3.3 3.2.8"/><path d="M13.6 3.6h7.6v5.6h-3.4l-2.6 2.2V9.2h-1.6z"/></svg></div>
         <div class="cap">Message the team</div>
         <div class="sub">No front desk, but always someone</div>
       </a>
+    </div>
+
+    <div class="row-label">Before you go</div>
+    <div class="row" data-nav-row>
       <a class="poster" href="/stay/your-bill/">
-        <div class="art"><svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="sreceipt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#243c33"/><stop offset="1" stop-color="#0f211a"/></linearGradient></defs><rect width="160" height="90" fill="url(#sreceipt)"/><rect x="46" y="14" width="68" height="66" rx="2" fill="#F9F8F3" opacity=".92"/><g stroke="#191d1b" stroke-width="1.6" opacity=".35"><line x1="54" y1="26" x2="96" y2="26"/><line x1="54" y1="36" x2="106" y2="36"/><line x1="54" y1="44" x2="106" y2="44"/><line x1="54" y1="52" x2="106" y2="52"/></g><line x1="54" y1="62" x2="106" y2="62" stroke="#191d1b" stroke-width="1" opacity=".2"/><g stroke="#FAB30C" stroke-width="2.4"><line x1="54" y1="70" x2="82" y2="70"/></g></svg></div>
+        <div class="art"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.2h12v17.6l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4z"/><path d="M9.2 8.4h5.6M9.2 11.8h5.6M9.2 15.2h3.4"/></svg></div>
         <div class="cap">Your bill</div>
         <div class="sub">Settled on the card you booked with</div>
       </a>
-    </div>
-    <div class="row-label">Before you go</div>
-    <div class="row" data-nav-row>
       <a class="poster" href="/stay/book-direct/">
-        <div class="art"><svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="skey" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24413a"/><stop offset="1" stop-color="#0f211a"/></linearGradient></defs><rect width="160" height="90" fill="url(#skey)"/><g fill="#FAB30C" opacity=".9"><circle cx="52" cy="45" r="13"/></g><circle cx="52" cy="45" r="5" fill="#0f211a"/><rect x="64" y="41" width="52" height="8" rx="2" fill="#FAB30C" opacity=".9"/><rect x="100" y="49" width="6" height="9" fill="#FAB30C" opacity=".9"/><rect x="110" y="49" width="6" height="6" fill="#FAB30C" opacity=".9"/></svg></div>
+        <div class="art"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="4.2"/><path d="M12.2 12h8.6"/><path d="M17.2 12v3.4"/><path d="M20.2 12v2.4"/></svg></div>
         <div class="cap">Come back direct</div>
         <div class="sub">The best rate, and the good rooms</div>
       </a>
-      <a class="poster" href="/house/">
-        <div class="art"><svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="sheritage" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#243c33"/><stop offset="1" stop-color="#0f211a"/></linearGradient></defs><rect width="160" height="90" fill="url(#sheritage)"/><rect x="34" y="24" width="92" height="56" fill="#1b2f26"/><g fill="#FAB30C" opacity=".2"><rect x="44" y="34" width="16" height="18"/><rect x="72" y="34" width="16" height="18"/><rect x="100" y="34" width="16" height="18"/><rect x="44" y="60" width="16" height="16"/><rect x="100" y="60" width="16" height="16"/></g><g stroke="#1b2f26" stroke-width="1.4"><line x1="44" y1="43" x2="60" y2="43"/><line x1="72" y1="43" x2="88" y2="43"/><line x1="100" y1="43" x2="116" y2="43"/></g><rect x="72" y="58" width="16" height="22" rx="1" fill="#0f211a"/><path d="M30 24 l50-14 l50 14 z" fill="#16261f"/></svg></div>
-        <div class="cap">House guide</div>
-        <div class="sub">How everything works</div>
-      </a>
     </div>
+
   </main>
 
   <footer class="footer">
@@ -77,7 +82,7 @@
 
 </div>
 
-<script src="/config/the-view.js?v=2"></script>
-<script src="/assets/bide.js?v=2"></script>
+<script src="/config/the-view.js?v=19"></script>
+<script src="/assets/bide.js?v=19"></script>
 </body>
 </html>

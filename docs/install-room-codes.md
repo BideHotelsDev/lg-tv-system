@@ -3,7 +3,7 @@
 One URL per television, set once during installation as the browser home page
 (or the boot target, if the installer menu allows one — dev-kit item 1).
 
-Base URL: `https://guest-tv-production.up.railway.app`
+Base URL: `https://the-view.up.railway.app`
 
 | Room | Room name | Path |
 |---|---|---|
@@ -20,7 +20,7 @@ Base URL: `https://guest-tv-production.up.railway.app`
 So room 4 is configured as:
 
 ```
-https://guest-tv-production.up.railway.app/?r=hmws9kv
+https://the-view.up.railway.app/?r=hmws9kv
 ```
 
 ## Why codes and not room numbers

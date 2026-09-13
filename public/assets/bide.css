@@ -238,7 +238,7 @@ body{
 /* ---------- content pages ---------- */
 body[data-bide-page]:not([data-bide-page="welcome"]) .horizon{display:none}
 
-.page-head{flex:0 0 auto;margin-top:3.5vh;margin-bottom:2.4vh}
+.page-head{flex:0 0 auto;margin-top:2.6vh;margin-bottom:1.8vh}
 .page-title{
   font-family:var(--font-display);font-weight:340;
   font-size:clamp(44px,7vh,96px);line-height:1.08;
@@ -303,21 +303,31 @@ body[data-bide-page]:not([data-bide-page="welcome"]) .horizon{display:none}
 
 /* ---------- detail pages ---------- */
 .detail{
-  flex:1 1 auto;overflow-y:auto;padding:1vh 0 8vh;
+  /* 8vh of bottom padding was pushing the last thing on the page past
+     the fade at the bottom of this box. On a detail page the last thing
+     is the button, and half a button is worse than a tight margin. */
+  flex:1 1 auto;overflow-y:auto;padding:1vh 0 2vh;
   -webkit-mask-image:linear-gradient(180deg,#000 0,#000 90%,rgba(0,0,0,.15) 100%);
   mask-image:linear-gradient(180deg,#000 0,#000 90%,rgba(0,0,0,.15) 100%);
 }
 .detail::-webkit-scrollbar{width:0;height:0}
 .detail p{
   font-size:var(--t-body);font-weight:300;color:var(--stone-60);
-  line-height:1.55;max-width:72ch;
+  /* 72ch is a measure for a page held in the hand. Across a room the eye
+     loses the start of the next line long before that. Short enough to
+     scan, long enough that the three-paragraph pages do not grow a line
+     each and push the facts off the bottom. */
+  line-height:1.55;max-width:62ch;
 }
-.detail p + p{margin-top:1.6vh}
+.detail p + p{margin-top:1.2vh}
 .detail p strong{color:var(--stone);font-weight:500}
 
 .practical{
-  margin-top:3vh;padding-top:2.4vh;border-top:1px solid var(--stone-14);
-  display:flex;flex-wrap:wrap;gap:1.2vh 4vw;max-width:72ch;
+  margin-top:2.2vh;padding-top:1.8vh;border-top:1px solid var(--stone-14);
+  /* Held to 72ch these three facts wrapped onto two lines and pushed the
+     button off the bottom of the page, while the right half of the screen
+     sat empty. Prose wants a measure; three short labelled facts do not. */
+  display:flex;flex-wrap:wrap;gap:1.2vh 4vw;
 }
 .practical div{min-width:14vw}
 .practical dt{
@@ -386,6 +396,9 @@ body[data-bide-page]:not([data-bide-page="welcome"]) .horizon{display:none}
   color:var(--slate);background:var(--gorse);
   border:1px solid var(--gorse);border-radius:.9vh;
   padding:1.6vh 2.4vw;cursor:pointer;outline:none;
+  /* A .btn is a button whether it is an <a> or a <button>. Without this
+     the anchors carry the document underline and the two do not match. */
+  text-decoration:none;
   transition:transform .18s ease, box-shadow .18s ease;
 }
 .btn--quiet{background:transparent;color:var(--stone);border-color:var(--stone-14)}
@@ -540,13 +553,13 @@ body[data-bide-page]:not([data-bide-page="welcome"]) .horizon{display:none}
    ============================================================ */
 
 :root{
-  --poster-w:15vw;
-  --poster-h:8.4vw;      /* 16:9. aspect-ratio is Chrome 88, we target 87 */
+  --poster-w:23vw;
+  --poster-h:12.9vw;     /* 16:9. aspect-ratio is Chrome 88, we target 87 */
   --tile-w:17vw;
   --tile-h:9.6vw;
 }
 @media (max-width:1500px){
-  :root{--poster-w:17vw;--poster-h:9.5vw;--tile-w:19vw;--tile-h:10vw}
+  :root{--poster-w:27vw;--poster-h:15.2vw;--tile-w:19vw;--tile-h:10vw}
   .hero{height:24vh;min-height:24vh;padding:2.4vh 3vw;margin-bottom:2.2vh}
   .row{margin-bottom:2.2vh;padding-bottom:1.4vh}
 }
@@ -565,7 +578,7 @@ body[data-bide-page]:not([data-bide-page="welcome"]) .horizon{display:none}
 /* ---------- hero ---------- */
 .hero{
   position:relative;
-  height:32vh;min-height:32vh;
+  height:27vh;min-height:27vh;
   border-radius:1.4vh;
   background:linear-gradient(90deg,#0f211a 0%,#16261f 55%,#1d332a 100%);
   overflow:hidden;
@@ -596,6 +609,13 @@ body[data-bide-page]:not([data-bide-page="welcome"]) .horizon{display:none}
   font-size:var(--t-label);letter-spacing:.3em;text-transform:uppercase;
   color:var(--stone-35);margin:0 0 1.4vh;
 }
+/* A line that is only true while this is a prototype. It is removed,
+   not hidden, when demo goes false. */
+.row-note{
+  font-size:var(--t-tile-p);color:var(--stone-35);
+  margin:-0.6vh 0 1.4vh;font-style:italic;
+}
+
 .row{
   display:flex;gap:1.2vw;
   overflow-x:auto;overflow-y:hidden;
@@ -612,17 +632,23 @@ body[data-bide-page]:not([data-bide-page="welcome"]) .horizon{display:none}
 }
 .poster .art{
   width:100%;height:var(--poster-h);
-  border-radius:1vh;border:1px solid transparent;
+  border-radius:1.2vh;border:1px solid transparent;
   display:flex;align-items:flex-end;padding:.8vh;
   transition:border-color .18s ease, box-shadow .18s ease;
 }
 .poster .cap{
-  margin-top:1vh;font-size:var(--t-tile-p);font-weight:400;
-  color:var(--stone-60);line-height:1.3;
+  margin-top:1.3vh;font-size:var(--t-tile-h);font-weight:400;
+  color:var(--stone-60);line-height:1.25;
 }
 .poster .sub{
-  font-size:calc(var(--t-tile-p) * .82);color:var(--stone-35);margin-top:.3vh;
+  font-size:var(--t-tile-p);color:var(--stone-35);margin-top:.45vh;
 }
+/* The map is the orienting card on the NC500 guide, and it was sitting
+   alone in a row four cards wide. Given the width it was wasting, it
+   takes it. */
+.poster.wide{width:calc(var(--poster-w) * 2 + 1.2vw)}
+.poster.wide .art{height:calc(var(--poster-h) * 1.22)}
+
 .poster:hover,.poster:focus,.poster.is-focused{transform:translateY(-1.2vh)}
 .poster:hover .art,.poster:focus .art,.poster.is-focused .art{
   border-color:var(--gorse);
@@ -700,15 +726,38 @@ body[data-bide-page]:not([data-bide-page="welcome"]) .horizon{display:none}
   mask-image:linear-gradient(90deg,transparent 0,#000 38%);
 }
 
-/* ---------- the map ---------- */
+/* ---------- the map ----------
+   The land, the coastline and the road are traced from OpenStreetMap by
+   tools/map/build.mjs and pasted in as inline SVG — no tiles, no library
+   and no request off the television. Colours belong here rather than on
+   the shapes, so the map recolours with the property (spec 11.1).
+   Geometry © OpenStreetMap contributors, ODbL. */
+.sea{fill:#0e1c18}
+.land{fill:#1b3329}
+.shore{
+  fill:none;stroke:var(--gorse);stroke-width:1.1;opacity:.55;
+  stroke-linejoin:round;stroke-linecap:round;
+}
+.road{
+  fill:none;stroke:var(--stone);stroke-width:.9;opacity:.22;
+  stroke-dasharray:4 3;stroke-linecap:round;
+}
+/* On the coast map the dash reads as "a road across sixty miles". On the
+   town map the same dash on forty streets reads as static, so the town
+   draws its streets solid and thin. */
+.map--town .road{stroke-dasharray:none;stroke-width:.7;opacity:.26}
+
 .mapwrap{
   flex:1 1 auto;position:relative;
   display:flex;align-items:center;justify-content:center;
   min-height:0;
 }
-.mapwrap svg{width:100%;height:100%;max-height:62vh;display:block}
+.mapwrap svg{width:100%;height:100%;max-height:64vh;display:block}
 
 .pin-hit{cursor:pointer;outline:none}
+/* The same pin inside a card, where the card is the link and the pin is
+   only a picture of one. No hover, no focus, nothing to land on. */
+.pin{pointer-events:none}
 .pin-dot{fill:var(--gorse);stroke:var(--fir-deep);stroke-width:1.2}
 .pin-ring{fill:none;stroke:var(--gorse);stroke-width:1.4;opacity:0}
 .pin-label{
@@ -731,4 +780,374 @@ body[data-bide-page]:not([data-bide-page="welcome"]) .horizon{display:none}
 .map-legend{
   flex:0 0 auto;margin-top:1.4vh;
   font-size:var(--t-tile-p);color:var(--stone-35);
+}
+
+/* ============================================================
+   Seed photography
+
+   Photographs sit UNDER the existing artwork rather than replacing
+   it: every .art and every .hero keeps its inline SVG scene, and the
+   photograph is laid over it. If a file is missing, slow, or the
+   television refuses the decode, the scene is still there and the
+   page looks the way it always did. That is also why the img carries
+   an inline onerror — a broken-image glyph on a 43-inch panel is worse
+   than no photograph at all.
+
+   Everything here is self-hosted under /assets/seed/. No external
+   request is made for imagery, so the offline shell stays honest.
+   See public/assets/seed/CREDITS.md.
+
+   Chromium 87: object-fit is fine, `inset` is not — it landed in 88.
+   Longhand top/right/bottom/left throughout.
+   ============================================================ */
+
+.ph{
+  position:absolute;top:0;right:0;bottom:0;left:0;
+  width:100%;height:100%;
+  display:block;
+  object-fit:cover;
+  /* Pulled towards the palette so a photograph never fights the fir. */
+  filter:saturate(.82) brightness(.9);
+}
+
+/* ---------- a programme, set as type ----------
+   Real titles get our typography on our colour, never a borrowed
+   poster. The card still has to read as a programme from across a
+   room, so the name is set large in the display face and the caption
+   underneath repeats it for the row rhythm. */
+.showcard .art{
+  display:flex;align-items:center;justify-content:center;
+  padding:0 1.2vw;text-align:center;
+}
+.showtitle{
+  position:relative;z-index:1;
+  font-family:var(--font-display);font-weight:340;
+  font-size:clamp(20px,2.9vh,40px);line-height:1.1;
+  color:var(--stone);
+  text-wrap:balance;
+}
+.showcard .art::after{
+  content:"";position:absolute;top:0;right:0;bottom:0;left:0;
+  background:linear-gradient(180deg,rgba(15,33,26,0) 40%,rgba(15,33,26,.55) 100%);
+}
+
+/* ---------- line glyphs in card art ----------
+   The house guide used little filled illustrations: a grey tap, a
+   radiator that read as a barcode, a house with lit windows. Three
+   different drawing styles, none of them the one the welcome screen
+   already established. These are the same hand as the tile icons —
+   one weight, one colour, currentColor so focus turns them gorse. */
+.art > .glyph{
+  position:absolute;top:50%;left:50%;
+  width:auto;height:44%;
+  margin:0;
+  transform:translate(-50%,-50%);
+  color:var(--stone-60);
+  fill:none;stroke:currentColor;stroke-width:1.4;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:color .18s ease;
+}
+.poster:hover .art > .glyph,
+.poster:focus .art > .glyph,
+.poster.is-focused .art > .glyph,
+.card:hover .art > .glyph,
+.card:focus .art > .glyph,
+.card.is-focused .art > .glyph{color:var(--gorse)}
+
+.hero > svg.elevation{opacity:.9}
+
+/* ---------- photographs in poster art ---------- */
+.art > .ph{z-index:1}
+.art > .scrim{
+  position:absolute;top:0;right:0;bottom:0;left:0;z-index:2;
+  background:linear-gradient(180deg,
+    rgba(15,33,26,.10) 0%,
+    rgba(15,33,26,.34) 55%,
+    rgba(15,33,26,.72) 100%);
+}
+/* the focus ring has to stay the brightest thing on the card */
+.poster:hover .art > .ph,
+.poster:focus .art > .ph,
+.poster.is-focused .art > .ph{filter:saturate(1) brightness(1.04)}
+
+/* ---------- photographs in a hero band ----------
+   Dissolved towards the left, like the SVG scene it replaces, so the
+   words are never read off a photograph.
+
+   It sits after the scene in the markup rather than before it, and both
+   are left on the same layer. That ordering is what makes the fallback
+   work: the photograph covers the scene when it loads, the scene is
+   there underneath when it does not, and the ::after scrim on the hero —
+   which is generated last — still darkens whichever of the two the
+   television ended up showing. */
+.hero > .ph{
+  /* Held further back than a poster card. A hero fills a third of the
+     screen, and at that size an unmuted photograph stops being the
+     backdrop to the words and starts competing with them. */
+  filter:saturate(.6) brightness(.6);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 44%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 44%);
+}
+
+/* ---------- the foot of a detail page ----------
+
+   Description, then facts, then button used to run straight down the
+   left of the screen with the right half empty, which cost the
+   photograph the room it needed and left the one action on the page
+   last. The facts and the action now share a line: the facts read
+   across, which is easier at three metres than a stacked list, and the
+   button sits at the end of them where the eye already is.
+
+   Flex rather than grid: gap on a flex container is Chromium 84, and
+   these are two things on a line, not a grid. */
+.cols{display:flex;align-items:flex-end;justify-content:space-between;gap:1.6vh 4vw;flex-wrap:wrap}
+.cols > .practical{flex:1 1 auto}
+.cols > .btn-row{flex:0 0 auto;margin-top:0}
+
+/* ---------- the detail page band ----------
+   The detail pages were pure text. A single band under the title gives
+   the page somewhere to start without pushing the practicalities off
+   the bottom of a 768-line panel. */
+.shot{
+  position:relative;flex:0 0 auto;
+  /* 20vh was a letterbox strip: 154px on a 1366x768 television, which is
+     about five centimetres of picture on a 32in screen seen from a bed.
+     The facts and the action moved beside the description rather than
+     under it, and the height that freed up is here. */
+  height:27vh;min-height:27vh;
+  margin:0 0 2.6vh;
+  border-radius:1.2vh;
+  overflow:hidden;
+  background:linear-gradient(135deg,#24382f 0%,#16241e 100%);
+}
+.shot > .ph{filter:saturate(.66) brightness(.68)}
+.shot > .scrim{
+  position:absolute;top:0;right:0;bottom:0;left:0;z-index:2;
+  background:linear-gradient(180deg,
+    rgba(15,33,26,.18) 0%,
+    rgba(15,33,26,.30) 45%,
+    rgba(15,33,26,.72) 100%);
+}
+.shot .credit{
+  position:absolute;z-index:3;right:1.2vw;bottom:1vh;
+  font-size:calc(var(--t-label) * .78);letter-spacing:.16em;
+  text-transform:uppercase;color:var(--stone-35);
+}
+
+/* ---------- the room on the welcome screen ----------
+   The View looks out at the Pentland Firth, and every room is named
+   for somewhere within sight of it. So the welcome screen shows the
+   place the room is named after, keyed by the code for that room.
+
+   It is deliberately faint. This is a backdrop the guest reads the
+   greeting over, not a picture they are being asked to look at, and
+   the greeting is the only thing on the screen that must be legible
+   from the bed. */
+.roomshot{
+  position:fixed;top:0;right:0;bottom:0;left:18%;
+  z-index:0;
+  overflow:hidden;
+  opacity:0;
+  transition:opacity 1.1s ease;
+  /* Dissolved into the panel rather than butted up against it. Without
+     this the photograph starts at a hard vertical line down the middle
+     of the screen, which on a television reads as a rendering fault. */
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 26%,#000 62%);
+  mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 26%,#000 62%);
+}
+.roomshot.is-shown{opacity:.55}
+.roomshot > .ph{filter:saturate(.7) brightness(.72)}
+.roomshot > .scrim{
+  position:absolute;top:0;right:0;bottom:0;left:0;
+  background:
+    linear-gradient(90deg, rgba(15,33,26,.86) 0%, rgba(15,33,26,.48) 40%, rgba(15,33,26,.20) 100%),
+    linear-gradient(180deg, rgba(15,33,26,.55) 0%, rgba(15,33,26,.10) 30%, rgba(15,33,26,.86) 100%);
+}
+/* The horizon is the brand mark. It goes over the photograph, not under. */
+.horizon,.horizon-glow{z-index:1}
+
+@media (prefers-reduced-motion:reduce){
+  .roomshot{transition:none}
+}
+
+/* On the 32-inch panel the greeting takes nearly the whole screen, so the
+   photograph is pushed further right and further down to keep out
+   of the way of it. */
+@media (max-width:1500px){
+  .roomshot{left:30%}
+  .roomshot.is-shown{opacity:.46}
+  /* 1366x768 is the other calibration target, and it is the tighter of
+     the two: the type sizes hit their px floors there, so everything but
+     the picture is proportionally larger than it is at 1080. The picture
+     gets what is left. */
+  .shot{height:23vh;min-height:23vh}
+}
+
+/* ============================================================
+   Phones and tablets
+
+   The television is the product; this is not a responsive redesign
+   of it. But these pages get opened on a laptop in a review, on a
+   phone by whoever is standing in the room with the installer, and
+   on a tablet by the housekeeper checking the wifi password. On any
+   of those the vh-driven TV layout is unusable: the type is sized
+   against viewport height, the screen is a fixed-height flex column
+   that never scrolls, and the rows are built for a remote.
+
+   No television reports a viewport under 1366px wide, so width alone
+   separates the two worlds. Below 1100px the page becomes an
+   ordinary scrolling document: type sized in px rather than vh,
+   one column, and the horizontal rows become touch-scrollable.
+   ============================================================ */
+
+@media (max-width:1100px){
+
+  /* The TV holds one screenful and never scrolls. A phone scrolls. */
+  html,body{height:auto;overflow-y:auto;overflow-x:hidden}
+  body{min-height:100%}
+
+  :root{
+    /* px, not vh: on a phone the viewport height is the wrong ruler,
+       and it changes when the address bar hides. */
+    --t-wordmark:34px;
+    --t-property:12px;
+    --t-clock:19px;
+    --t-greeting:52px;
+    --t-sub:19px;
+    --t-label:13px;
+    --t-tile-h:19px;
+    --t-tile-p:15px;
+    --t-footer:14px;
+    --t-body:17px;
+
+    --inset-x:22px;
+    --inset-y:20px;
+
+    --poster-w:62vw;
+    --poster-h:34.9vw;
+    --tile-w:62vw;
+    --tile-h:34.9vw;
+  }
+
+  .screen{height:auto;min-height:100vh;padding:var(--inset-y) var(--inset-x) 28px}
+
+  /* Wordmark and property name stop competing for one line. */
+  .topbar{align-items:flex-start}
+  .brand{flex-direction:column;align-items:flex-start;gap:4px}
+  .property{letter-spacing:.24em}
+
+  .greeting{max-width:none;padding:44px 0 34px}
+  .failte{line-height:1.06}
+  .sub{margin-top:16px;line-height:1.45}
+
+  .tiles{grid-template-columns:repeat(2,1fr);gap:12px}
+  .tile{min-height:0;padding:16px 14px 15px;min-width:0}
+  .tile .txt{min-width:0}
+  .tile .ico{width:26px;height:26px}
+  .tile .txt{margin-top:10px}
+
+  /* The inner panes scrolled themselves so the TV never had to. Here
+     the document scrolls, so they stop: two nested scrollers on a
+     touchscreen is a fight the user always loses. */
+  .stream,.cards,.detail{
+    overflow:visible;
+    -webkit-mask-image:none;mask-image:none;
+    padding-bottom:24px;
+  }
+  .stream::-webkit-scrollbar,.cards::-webkit-scrollbar,.detail::-webkit-scrollbar{display:none}
+
+  /* The wide card is two card-widths, which off the television is
+     wider than the screen it is on. */
+  .poster.wide{width:88vw}
+  .poster.wide .art{height:calc(var(--poster-h) * .92)}
+
+  .row{
+    margin:0 calc(var(--inset-x) * -1) 26px;
+    padding:8px var(--inset-x) 12px;
+    -webkit-overflow-scrolling:touch;      /* the rows still swipe */
+  }
+  .row-label{margin-bottom:10px}
+
+  .hero{height:auto;min-height:0;padding:120px 20px 22px;margin-bottom:26px;border-radius:12px}
+  .hero-title{font-size:32px;max-width:none}
+  .hero-sub{font-size:15px;max-width:none}
+  .hero > .ph,.hero > svg.scene{
+    -webkit-mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.35) 72%,transparent 100%);
+    mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.35) 72%,transparent 100%);
+  }
+  .hero::after{background:linear-gradient(180deg,rgba(15,33,26,.30) 0%,rgba(15,33,26,.88) 62%)}
+
+  .page-title{font-size:38px}
+  .page-head{margin-top:22px;margin-bottom:16px}
+
+  .shot{height:32vw;min-height:150px;border-radius:12px}
+
+  /* Behind the greeting rather than beside it. */
+  .roomshot{
+    position:fixed;top:0;right:0;bottom:0;left:0;
+    -webkit-mask-image:none;mask-image:none;
+  }
+  .roomshot.is-shown{opacity:.42}
+  .roomshot > .scrim{
+    background:linear-gradient(180deg,
+      rgba(15,33,26,.72) 0%, rgba(15,33,26,.34) 34%, rgba(15,33,26,.92) 100%);
+  }
+
+  .mapwrap svg{max-height:none}
+  .map-legend{font-size:13px}
+
+  .practical{gap:14px 26px}
+  .practical div{min-width:44%}
+
+  /* A sidebar needs something to sit beside. Below this width the facts
+     and the action are simply what comes after the description. */
+  .cols{display:block}
+  .cols > .btn-row{margin-top:26px}
+  .cols > .btn-row .btn{display:block;width:100%;text-align:center}
+
+  .footer{
+    flex-direction:column;align-items:flex-start;gap:8px;
+    margin-top:22px;
+  }
+
+  /* A finger is not a remote: the focus ring is decoration here, and
+     the lift on hover only ever fires from a stray tap. */
+  .tile:hover,.poster:hover,.apptile:hover,.card:hover{transform:none}
+}
+
+/* Phones proper. One column, and the display type stops shouting. */
+@media (max-width:640px){
+  :root{
+    --t-greeting:40px;
+    --t-wordmark:28px;
+    --poster-w:78vw;
+    --poster-h:43.9vw;
+    --tile-w:78vw;
+    --tile-h:43.9vw;
+    --inset-x:18px;
+  }
+  .tiles{grid-template-columns:1fr}
+  .tile{flex-direction:row;align-items:center;gap:14px;padding:14px}
+  .tile .ico{width:22px;height:22px}
+  /* A flex item will not shrink below its content unless it is told it
+     may. Without this the longest tile description sets the width of the
+     grid, the grid sets the width of the page, and the greeting above it
+     runs off the side of the phone. */
+  .tile .txt{margin-top:0;min-width:0;flex:1 1 auto}
+  .tile h3,.tile p{overflow-wrap:break-word}
+  .greeting{padding:30px 0 26px}
+  .hero{padding:96px 16px 18px}
+  .hero-title{font-size:26px}
+  .page-title{font-size:30px}
+  .poster.wide{width:88vw}
+  .poster.wide .art{height:calc(var(--poster-h) * 1.1)}
+  .shot{min-height:130px}
+}
+
+/* Landscape on a phone is shorter than the TV layout assumes and the
+   greeting alone fills it. Give the height back to the content. */
+@media (max-width:1100px) and (orientation:landscape) and (max-height:520px){
+  :root{--t-greeting:34px}
+  .greeting{padding:20px 0 18px}
+  .hero{padding:70px 18px 16px}
 }
